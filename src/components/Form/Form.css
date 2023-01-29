@@ -1,0 +1,46 @@
+.Form__error-info {
+	padding: 0;
+	margin: 9px 0 0 0;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #ee3465;
+}
+
+.Form__button {
+	margin-top: 69px;
+	cursor: pointer;
+	min-width: 100%;
+	border: none;
+	height: 45px;
+	background: #ff6838;
+	border-radius: 3px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: #fff;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.Form__button:hover {
+	opacity: 0.8;
+}
+
+@media screen and (max-width: 420px) {
+	.Form {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+	}
+
+	.Form__error-info {
+		flex-grow: 1;
+	}
+
+	.Form__button {
+		margin-top: 15px;
+		font-size: 12px;
+		line-height: 15px;
+	}
+}
