@@ -15,3 +15,14 @@ export const headerNavigationData = [
 		isAccount: true,
 	},
 ];
+
+export const footerNavigationData = [
+	{
+		link: 'https://practicum.yandex.ru/',
+		name: 'Яндекс.Практикум',
+	},
+	{
+		link: 'https://github.com/Maks-well-88',
+		name: 'Github',
+	},
+];
