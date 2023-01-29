@@ -5,12 +5,14 @@ import { Form } from '../Form/Form';
 import './Register.css';
 
 export const Register = () => {
+	const registerError = 'Что-то пошло не так...';
+
 	return (
 		<section className='Register'>
 			<div className='Register__container'>
 				<Logo />
 				<h1 className='Register__title'>Добро пожаловать!</h1>
-				<Form button={'Зарегистрироваться'}>
+				<Form button={'Зарегистрироваться'} registerError={registerError}>
 					<label className='Register__label' lang='en' htmlFor='name'>
 						Имя
 						<input

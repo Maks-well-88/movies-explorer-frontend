@@ -1,14 +1,22 @@
+.Form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
 .Form__error-info {
 	padding: 0;
-	margin: 9px 0 0 0;
+	margin: 10px 0 0 0;
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 12px;
 	color: #ee3465;
+	flex-grow: 1;
 }
 
 .Form__button {
-	margin-top: 69px;
+	margin-top: 20px;
 	cursor: pointer;
 	min-width: 100%;
 	border: none;
@@ -27,19 +35,7 @@
 }
 
 @media screen and (max-width: 420px) {
-	.Form {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		height: 100%;
-	}
-
-	.Form__error-info {
-		flex-grow: 1;
-	}
-
 	.Form__button {
-		margin-top: 15px;
 		font-size: 12px;
 		line-height: 15px;
 	}

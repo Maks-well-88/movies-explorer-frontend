@@ -1,19 +1,21 @@
 .Register {
 	margin: auto;
+	max-width: 396px;
 	min-height: 100vh;
-	padding: 70px 0;
-	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 }
 
 .Register__container {
-	max-width: 396px;
+	height: 560px;
+	display: flex;
+	flex-direction: column;
 }
 
 .Register__title {
-	margin: 37px 0 35px 0;
+	margin: 37px 0 40px 0;
 	font-weight: 500;
 	font-size: 24px;
 	line-height: 29px;
@@ -27,7 +29,7 @@
 }
 
 .Register__field {
-	margin: 8px 0 16px 0;
+	margin: 10px 0 20px 0;
 	box-sizing: border-box;
 	width: 396px;
 	padding: 15px;
@@ -85,16 +87,23 @@
 }
 
 @media screen and (max-width: 420px) {
+	.Register {
+		align-items: flex-start;
+	}
+
 	.Register__container {
 		padding: 56px 30px 30px 30px;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
+		max-width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		box-sizing: border-box;
 	}
 
 	.Register__title {
@@ -103,7 +112,7 @@
 	}
 
 	.Register__field {
-		width: 100%;
+		max-width: 100%;
 		margin: 10px 0 20px 0;
 	}
 
