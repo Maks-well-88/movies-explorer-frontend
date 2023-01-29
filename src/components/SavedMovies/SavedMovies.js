@@ -4,10 +4,10 @@ import './SavedMovies.css';
 
 export const SavedMovies = () => {
 	return (
-		<div>
+		<>
 			<Header />
 			<p>SavedMovies</p>
 			<Footer />
-		</div>
+		</>
 	);
 };

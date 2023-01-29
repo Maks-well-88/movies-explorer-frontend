@@ -1,5 +1,13 @@
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 import './Movies.css';
 
 export const Movies = () => {
-	return <div>Movies</div>;
+	return (
+		<>
+			<Header />
+			<p>Movies</p>
+			<Footer />
+		</>
+	);
 };
