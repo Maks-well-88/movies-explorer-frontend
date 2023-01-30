@@ -12,7 +12,7 @@ import { AppContext } from '../../contexts/AppContext';
 import './App.css';
 
 export const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const location = useLocation();
 
 	return (
