@@ -2,17 +2,16 @@ export const headerNavigationData = [
 	{
 		link: '/movies',
 		name: 'Фильмы',
-		isAccount: false,
+		isButton: false,
 	},
 	{
 		link: '/saved-movies',
 		name: 'Сохранённые фильмы',
-		isAccount: false,
+		isButton: false,
 	},
 	{
-		link: '/profile',
 		name: 'Аккаунт',
-		isAccount: true,
+		isButton: true,
 	},
 ];
 
