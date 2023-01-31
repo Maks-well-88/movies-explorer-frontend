@@ -20,14 +20,6 @@ export const AboutProject = () => {
 					</p>
 				</li>
 			</ul>
-			{/* <ul className='AboutProject__timeline-list'>
-				<li className='AboutProject__timeline-item'>1 неделя</li>
-				<li className='AboutProject__timeline-item'>4 недели</li>
-			</ul>
-			<ul className='AboutProject__direction-list'>
-				<li className='AboutProject__direction-item'>Back-end</li>
-				<li className='AboutProject__direction-item'>Front-end</li>
-			</ul> */}
 			<div className='AboutProject__timeline-list'>
 				<div className='AboutProject__timeline-item'>1 неделя</div>
 				<div className='AboutProject__timeline-item'>4 недели</div>
