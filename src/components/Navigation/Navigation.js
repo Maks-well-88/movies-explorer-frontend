@@ -3,15 +3,15 @@ import { useContext } from 'react';
 
 import { AppContext } from '../../contexts/AppContext';
 import { AccountButton } from '../AccountButton/AccountButton';
-import './Navigation.css';
-import BurgerMenu from '../../images/burger-menu.svg';
+import { BurgerMenu } from '../App/BurgerMenu/BurgerMenu';
 import { headerNavigationData } from '../../utils/constants';
+import './Navigation.css';
 
 export const Navigation = () => {
 	const { location, isLoggedIn } = useContext(AppContext);
 	const navigate = useNavigate();
 
-	const linkClass =
+	const linkStyle =
 		location.pathname === '/' ? 'Navigation__link Navigation__link_position_main' : 'Navigation__link';
 	const handleSignInButtonClick = () => navigate('/signin');
 
@@ -19,7 +19,7 @@ export const Navigation = () => {
 		<nav className='Navigation'>
 			{isLoggedIn ? (
 				<>
-					<img className='Navigation__menu' src={BurgerMenu} alt='Меню' />
+					<BurgerMenu />
 					<ul className='Navigation__list'>
 						{headerNavigationData.map((item, i) => (
 							<li key={i} className='Navigation__item'>
@@ -28,7 +28,7 @@ export const Navigation = () => {
 								) : (
 									<NavLink
 										className={({ isActive }) =>
-											isActive ? `${linkClass} Navigation__link_active` : `${linkClass}`
+											isActive ? `${linkStyle} Navigation__link_active` : `${linkStyle}`
 										}
 										to={item.link}
 									>
