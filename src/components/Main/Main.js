@@ -2,6 +2,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Promo } from '../Promo/Promo';
 import { AboutProject } from '../AboutProject/AboutProject';
+import { Techs } from '../Techs/Techs';
 import './Main.css';
 
 export const Main = () => {
@@ -10,6 +11,7 @@ export const Main = () => {
 			<Header />
 			<Promo />
 			<AboutProject />
+			<Techs />
 			<Footer />
 		</div>
 	);
