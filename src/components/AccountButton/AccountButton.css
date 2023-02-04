@@ -1,7 +1,6 @@
 .Navigation__account-button {
 	width: 100px;
 	height: 32px;
-	margin-left: 46px;
 	box-sizing: border-box;
 	padding: 8px 10px;
 	background-color: #ffffff;
@@ -16,10 +15,14 @@
 	color: #000000;
 }
 
-.Navigation__account-button_position_main {
+.Navigation__account-button_color_white {
 	background-color: inherit;
 	border: 2px solid #f5f5f5;
 	color: #ffffff;
+}
+
+.Navigation__account-button_position_header {
+	margin-left: 46px;
 }
 
 .Navigation__account-button:hover {
@@ -27,12 +30,13 @@
 }
 
 .Navigation__account-icon {
+	display: none;
 	width: 12px;
 	height: 14px;
 }
 
-.Navigation__account-icon_position_main {
-	display: none;
+.Navigation__account-icon_active {
+	display: block;
 }
 
 .Navigation__account-text {

@@ -8,16 +8,32 @@ import { Register } from '../Register/Register';
 import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 import { NotFound } from '../NotFound/NotFound';
+import { Menu } from '../Menu/Menu';
 import { AppContext } from '../../contexts/AppContext';
 import './App.css';
 
 export const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const location = useLocation();
+
+	const handleOpenMenu = () => setIsOpenedMenu(true);
+	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
+	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
 
 	return (
 		<div className='App'>
-			<AppContext.Provider value={{ location, isLoggedIn }}>
+			<AppContext.Provider
+				value={{
+					location,
+					isLoggedIn,
+					isOpenedMenu,
+					setIsOpenedMenu,
+					handleOpenMenu,
+					handleCloseMenuEsc,
+					handleCloseMenu,
+				}}
+			>
 				<Routes>
 					<Route path='/' element={<Main />} />
 					<Route path='/movies' element={<Movies />} />
@@ -27,6 +43,7 @@ export const App = () => {
 					<Route path='/profile' element={<Profile />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
+				<Menu />
 			</AppContext.Provider>
 		</div>
 	);

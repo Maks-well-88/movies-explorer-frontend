@@ -12,7 +12,7 @@ export const Navigation = () => {
 	const navigate = useNavigate();
 
 	const linkStyle =
-		location.pathname === '/' ? 'Navigation__link Navigation__link_position_main' : 'Navigation__link';
+		location.pathname === '/' ? 'Navigation__link Navigation__link_color_white' : 'Navigation__link';
 	const handleSignInButtonClick = () => navigate('/signin');
 
 	return (
@@ -24,7 +24,7 @@ export const Navigation = () => {
 						{headerNavigationData.map((item, i) => (
 							<li key={i} className='Navigation__item'>
 								{item.isButton ? (
-									<AccountButton name={item.name} />
+									<AccountButton name={item.name} position={'header'} />
 								) : (
 									<NavLink
 										className={({ isActive }) =>

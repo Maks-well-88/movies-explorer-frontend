@@ -9,19 +9,13 @@
 		display: block;
 	}
 
-	.Navigation__menu_position_main {
+	.Navigation__menu_hidden {
 		display: none;
 	}
 }
 
 @media screen and (max-width: 420px) {
 	.Navigation__menu {
-		display: block;
 		width: 38px;
-		height: 44px;
-	}
-
-	.Navigation__menu_position_main {
-		display: none;
 	}
 }
