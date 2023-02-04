@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../../../contexts/AppContext';
-import BurgerMenuBlack from '../../../images/burger-menu-black.svg';
-import BurgerMenuWhite from '../../../images/burger-menu-white.svg';
+import { AppContext } from '../../contexts/AppContext';
+import BurgerMenuBlack from '../../images/burger-menu-black.svg';
+import BurgerMenuWhite from '../../images/burger-menu-white.svg';
 import './BurgerMenu.css';
 
 export const BurgerMenu = () => {

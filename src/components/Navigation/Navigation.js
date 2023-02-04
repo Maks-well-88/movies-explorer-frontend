@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { AppContext } from '../../contexts/AppContext';
 import { AccountButton } from '../AccountButton/AccountButton';
-import { BurgerMenu } from '../App/BurgerMenu/BurgerMenu';
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { headerNavigationData } from '../../utils/constants';
 import './Navigation.css';
 
