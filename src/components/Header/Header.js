@@ -9,11 +9,11 @@ export const Header = () => {
 	const { location } = useContext(AppContext);
 
 	return (
-		<div className={location.pathname === '/' ? 'Header Header_location_main' : 'Header'}>
+		<header className={location.pathname === '/' ? 'Header Header_location_main' : 'Header'}>
 			<div className='Header__container'>
 				<Logo />
 				<Navigation />
 			</div>
-		</div>
+		</header>
 	);
 };

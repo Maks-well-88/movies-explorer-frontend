@@ -3,8 +3,8 @@ import './Footer.css';
 
 export const Footer = () => {
 	return (
-		<section className='Footer'>
-			<h1 className='Footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h1>
+		<footer className='Footer'>
+			<p className='Footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
 			<div className='Footer__container'>
 				<span className='Footer__year'>&copy;&nbsp;{new Date().getFullYear()}</span>
 				<nav>
@@ -19,6 +19,6 @@ export const Footer = () => {
 					</ul>
 				</nav>
 			</div>
-		</section>
+		</footer>
 	);
 };
