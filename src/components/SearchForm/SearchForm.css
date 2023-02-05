@@ -87,6 +87,10 @@
 		padding: 81px 30px 120px 30px;
 	}
 
+	.SearchForm__container::after {
+		top: 180px;
+	}
+
 	.SearchForm__submit-button {
 		right: 20px;
 	}
@@ -95,7 +99,6 @@
 @media screen and (max-width: 580px) {
 	.SearchForm {
 		height: 272px;
-		padding: 80px 10px 120px 10px;
 	}
 
 	.SearchForm__container {
@@ -127,5 +130,11 @@
 
 	.SearchForm__container::after {
 		top: 181px;
+	}
+}
+
+@media screen and (max-width: 420px) {
+	.SearchForm {
+		padding: 80px 10px 120px 10px;
 	}
 }
