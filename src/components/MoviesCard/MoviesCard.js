@@ -1,6 +1,7 @@
+import { MovieButton } from '../MovieButton/MovieButton';
 import './MoviesCard.css';
 
-export const MoviesCard = ({ film, onDelete }) => {
+export const MoviesCard = ({ film }) => {
 	return (
 		<article className='MoviesCard'>
 			<div className='MoviesCard__description'>
@@ -9,11 +10,7 @@ export const MoviesCard = ({ film, onDelete }) => {
 			</div>
 			<img className='MoviesCard__image' src={film.imageSrc} alt={film.name} />
 			<div className='MoviesCard__button-wrapper'>
-				<button
-					className='MoviesCard__delete-button'
-					type='button'
-					onClick={() => onDelete(film.id)}
-				></button>
+				<MovieButton film={film} />
 			</div>
 		</article>
 	);

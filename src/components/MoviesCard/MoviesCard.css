@@ -41,20 +41,6 @@
 	min-height: 65px;
 }
 
-.MoviesCard__delete-button {
-	cursor: pointer;
-	width: 100px;
-	height: 29px;
-	border: none;
-	background: url('../../images/remove-button.svg') center center / 8px 8px no-repeat, #f9f9f9;
-	border-radius: 30px;
-	transition: opacity 0.2s ease-in-out;
-}
-
-.MoviesCard__delete-button:hover {
-	opacity: 0.8;
-}
-
 @media screen and (max-width: 420px) {
 	.MoviesCard__description {
 		min-height: 46px;
