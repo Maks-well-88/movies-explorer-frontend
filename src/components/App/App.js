@@ -11,14 +11,16 @@ import { NotFound } from '../NotFound/NotFound';
 import { Menu } from '../Menu/Menu';
 import { AppContext } from '../../contexts/AppContext';
 import { savedMoviesList } from '../../utils/constants';
+import { moviesList } from '../../utils/constants';
 import './App.css';
 
 export const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(true);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const location = useLocation();
-	const [movies, setMovies] = useState(savedMoviesList);
-	const handleRemoveCard = id => setMovies(movies.filter(film => film.id !== id));
+	const [movies, setMovies] = useState(moviesList);
+	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
+	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
@@ -37,6 +39,7 @@ export const App = () => {
 					handleCloseMenu,
 					handleRemoveCard,
 					movies,
+					savedMovies,
 				}}
 			>
 				<Routes>
