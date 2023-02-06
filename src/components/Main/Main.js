@@ -9,7 +9,7 @@ import './Main.css';
 
 export const Main = () => {
 	return (
-		<div>
+		<>
 			<Header />
 			<Promo />
 			<AboutProject />
@@ -17,6 +17,6 @@ export const Main = () => {
 			<AboutMe />
 			<Portfolio />
 			<Footer />
-		</div>
+		</>
 	);
 };
