@@ -23,7 +23,7 @@ export const FilterCheckbox = ({ checked, onCheck }) => {
 					onChange={onCheck}
 				/>
 			</div>
-			<label className='FilterCheckbox__name' for='filter-switcher'>
+			<label className='FilterCheckbox__name' htmlFor='filter-switcher'>
 				Короткометражки
 			</label>
 		</div>
