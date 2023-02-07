@@ -149,3 +149,16 @@ export const moviesList = [
 		saved: false,
 	},
 ];
+
+export const errorMessages = {
+	profileError: 'При обновлении профиля произошла ошибка',
+	serverError: '500, на сервере произошла ошибка',
+	notFound: '404 Страница по указанному маршруту не найдена',
+	userExists: 'Пользователь с таким email уже существует',
+	registrationError: 'При регистрации пользователя произошла ошибка',
+	userEmailExists: 'Пользователь с таким email уже существует',
+	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректе',
+	authorizationTokenWrongFormat:
+		'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
+	wrongUsernamePassword: 'Вы ввели неправильный логин или пароль',
+};
