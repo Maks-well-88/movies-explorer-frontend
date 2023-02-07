@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Фронтенд для приложения Movies Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+В данном репозитории реализована клиентская часть приложения на React, а именно представление интерфейса для взаимодействия с api сервиса BeatFilm.
+Логика будет подготовлена в следующем этапе дипломной работы.
 
-## Available Scripts
+## Технологии текущего этапа
 
-In the project directory, you can run:
+HTML, CSS, REACT, USE-STATE, USE-EFFECT, USE-CONTEXT, REACT-ROUTER.
 
-### `npm start`
+## Маршруты
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- '/' - страница "О проете". Ничего примечатльного здесь нет, основной фокус сосредоточен на вёрстке макета. Данные о студенте (имя, должность, описание) использолваны исходные, чтобы ревьюер смог проверить работу на соответствие макету. Возможно, в будущем данные студента я заменю на свои. В данный момент в header страницы отображается навигация зарегистрированнго пользователя. Чтобы посмотреть реализацию незарегистрированного пользователя нужно зайти в компонент App, далее найти const [isLoggedIn, setIsLoggedIn] = useState(true), где заменить состаяноие на false.
+- '/signin' - страница логина. Ориентируясь на макет, я предположил, что центральный элемент (лого, форма и кнопка) должны находиться всегда по центру вне зависимости от от ориентации.
+- '/signup' - страница регистрации. Ориентируясь на макет, я предположил, что центральный элемент (лого, форма и кнопка) должны находиться всегда по центру вне зависимости от от ориентации. Сообщение об ошибке целенаправлено захардкожено в разметку (не использовался существующий компонент, в будущем при реализации логики я буду использовать необходимый компонент).
+- '/movies' - страница с фильмами (в будущем будет подгружаться при загрузке приложения). Чек-бокс "короткометражки" можно кликать, чтобы видеть изменение его стиля. При изменении размера экрана должно меняться количество отображаемых карточек. На данном этапе не реализована логика кнопкпи "Ещё", так как нет детальных данных о её работе. Однако, можно нажать на кнопку "Сохранить" карточек, чтобы видеть изменение состаяния кнопок.
+- '/saved-movies' - страница с сохранёнными фильмами. Чек-бокс "короткометражки" можно кликать, чтобы видеть изменения стилей. Можно нажать на кнопку "х", чтобы удалить из сохранённых экземпляров выбранный вариант.
+- '/profile' - страница профиля. Здесь отображаются данные залогиненного пользоватлея. Если нажать кнопку "Редактировать", состояние приложения изменится, появится кнопка сохранить. Нажав на неё, мы сымитируем ошибку при обновлении прифиля. Чтобы вернуться в первоначальное состояние, нужно нажать Ctrl + R.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## На этом всё
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Про страницу с 404 я не стал писать, там всё и так понятно.
+Надеюсь, что вам понравится моя работа данного этама диплома. Да, я видел, что в блоке с рендерингом карточек немного не совпадет с макеторм, буквально 4-6 пикселей. Я это сознательно опустил, так как на внешний вид это никак не влияет. Дизайнер будет ругаться? Дайте мне его телефон, и мы решим этот вопрос персонально :).
+В остальном я как прилежный студент готов к правкам, заранее благодарю вас за терпение в процессе оценки моего труда.
