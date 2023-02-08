@@ -11,12 +11,14 @@ export const Main = () => {
 	return (
 		<>
 			<Header />
-			<Promo />
-			<AboutProject />
-			<Techs />
-			<AboutMe />
-			<Portfolio />
-			<Footer />
+			<main>
+				<Promo />
+				<AboutProject />
+				<Techs />
+				<AboutMe />
+				<Portfolio />
+				<Footer />
+			</main>
 		</>
 	);
 };

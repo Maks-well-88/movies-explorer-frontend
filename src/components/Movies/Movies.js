@@ -14,7 +14,9 @@ export const Movies = () => {
 		<>
 			<Header />
 			<SearchForm />
-			<MoviesCardList films={movies} />
+			<main>
+				<MoviesCardList films={movies} />
+			</main>
 			<Footer />
 		</>
 	);

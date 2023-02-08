@@ -14,7 +14,9 @@ export const SavedMovies = () => {
 		<>
 			<Header />
 			<SearchForm />
-			<MoviesCardList films={savedMovies} />
+			<main>
+				<MoviesCardList films={savedMovies} />
+			</main>
 			<Footer />
 		</>
 	);
