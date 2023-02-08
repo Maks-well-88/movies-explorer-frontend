@@ -27,10 +27,14 @@ export const MoviesCardList = ({ films }) => {
 		location.pathname === '/movies'
 			? 'MoviesCardList__more MoviesCardList__more_active'
 			: 'MoviesCardList__more';
+	const cardListStyle =
+		location.pathname === '/movies'
+			? 'MoviesCardList'
+			: 'MoviesCardList MoviesCardList_position_saved-movies';
 
 	return (
 		<>
-			<div className='MoviesCardList'>
+			<div className={cardListStyle}>
 				{films.slice(0, cardCount).map((film, i) => (
 					<MoviesCard key={i} film={film} />
 				))}
