@@ -35,7 +35,11 @@
 	border: none;
 	background-color: #f9f9f9;
 	border-radius: 9px 0 0 9px;
-	outline: none;
+}
+
+.SearchForm__input:focus {
+	outline-color: rgba(255, 104, 56, 0.8);
+	background-color: #ffffff;
 }
 
 .SearchForm__input-wrap::after {
@@ -45,7 +49,7 @@
 	background-color: #e8e8e8;
 	position: absolute;
 	top: 16px;
-	right: 0;
+	right: -2px;
 }
 
 .SearchForm__icon {

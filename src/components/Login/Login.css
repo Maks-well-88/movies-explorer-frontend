@@ -51,7 +51,9 @@
 }
 
 .Login__field:focus {
-	outline: none;
+	outline-color: rgba(255, 104, 56, 0.8);
+	border-radius: 2rem;
+	background-color: #ffffff;
 }
 
 .Login__info {
