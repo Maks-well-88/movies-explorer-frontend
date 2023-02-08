@@ -1,4 +1,5 @@
 .Navigation__account-button {
+	cursor: pointer;
 	width: 100px;
 	height: 32px;
 	box-sizing: border-box;
