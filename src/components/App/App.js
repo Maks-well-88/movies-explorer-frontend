@@ -15,7 +15,7 @@ import { moviesList } from '../../utils/constants';
 import './App.css';
 
 export const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const location = useLocation();
 	const [movies, setMovies] = useState(moviesList);
