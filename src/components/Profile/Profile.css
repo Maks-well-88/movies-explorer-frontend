@@ -48,11 +48,19 @@
 	line-height: 13px;
 }
 
+.Profile__error-container {
+	margin-top: 170px;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .Profile__buttons-container {
-	margin-top: 220px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	padding-bottom: 40px;
 }
 
 .Profile__button {
@@ -103,14 +111,18 @@
 		margin: 236px 0 97px 0;
 	}
 
-	.Profile__buttons-container {
-		margin-top: 210px;
+	.Profile__error-container {
+		margin-top: 160px;
 	}
 }
 
 @media screen and (max-width: 420px) {
 	.Profile {
-		max-width: 260px;
+		max-width: 288px;
+	}
+
+	.Profile__container {
+		padding: 0 15px;
 	}
 
 	.Profile__greeting {
@@ -120,7 +132,6 @@
 	.Profile__buttons-container {
 		flex-grow: 1;
 		justify-content: end;
-		margin-bottom: 40px;
 	}
 
 	.Profile__edit-button {

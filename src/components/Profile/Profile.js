@@ -38,8 +38,10 @@ export const Profile = () => {
 						</span>
 						<span lang='en'>pochta@yandex.ru</span>
 					</div>
-					<div className='Profile__buttons-container'>
+					<div className='Profile__error-container'>
 						{hasError && <ErrorMessage position={'profile'} message={errorMessages.profileError} />}
+					</div>
+					<div className='Profile__buttons-container'>
 						<button
 							disabled={hasError}
 							type='button'

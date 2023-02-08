@@ -14,7 +14,7 @@
 .MoviesCardList__more {
 	display: none;
 	justify-content: center;
-	margin: 20px 0 79px 0;
+	margin: 20px 10px 79px 10px;
 }
 
 .MoviesCardList__more_active {
