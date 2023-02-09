@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
@@ -20,8 +20,13 @@ export const App = () => {
 	const location = useLocation();
 	const [movies, setMovies] = useState(moviesList);
 	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
-	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 
+	useEffect(
+		() => (location.pathname === '/' ? setIsLoggedIn(false) : setIsLoggedIn(true)),
+		[location, setIsLoggedIn]
+	);
+
+	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
