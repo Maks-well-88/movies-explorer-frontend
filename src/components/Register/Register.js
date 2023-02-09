@@ -19,7 +19,7 @@ export const Register = () => {
 							className='Register__field'
 							name='name'
 							type='text'
-							autocomplete='off'
+							autoComplete='off'
 							placeholder='Введите ваше имя'
 							required
 						/>
@@ -30,7 +30,7 @@ export const Register = () => {
 							className='Register__field'
 							name='email'
 							type='email'
-							autocomplete='off'
+							autoComplete='off'
 							placeholder='Введите электронную почту'
 							required
 						/>
@@ -41,7 +41,7 @@ export const Register = () => {
 							className='Register__field Register__field_type_password'
 							name='password'
 							type='password'
-							autocomplete='off'
+							autoComplete='off'
 							placeholder='Введите пароль'
 							required
 						/>

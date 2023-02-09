@@ -17,7 +17,7 @@ export const Login = () => {
 							className='Login__field'
 							name='email'
 							type='email'
-							autocomplete='off'
+							autoComplete='off'
 							placeholder='Введите электронную почту'
 							required
 						/>
@@ -28,7 +28,7 @@ export const Login = () => {
 							className='Login__field Login__field_type_password'
 							name='password'
 							type='password'
-							autocomplete='off'
+							autoComplete='off'
 							placeholder='Введите пароль'
 							required
 						/>
