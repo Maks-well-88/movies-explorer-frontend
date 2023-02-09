@@ -129,8 +129,14 @@
 		margin: 70px 0 81px 0;
 	}
 
-	.Profile__buttons-container {
+	.Profile__error-container {
+		margin-top: 15px;
 		flex-grow: 1;
+		align-items: flex-end;
+		padding-bottom: 15px;
+	}
+
+	.Profile__buttons-container {
 		justify-content: end;
 	}
 
