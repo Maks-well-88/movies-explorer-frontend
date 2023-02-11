@@ -11,14 +11,15 @@ import { NotFound } from '../NotFound/NotFound';
 import { Menu } from '../Menu/Menu';
 import { AppContext } from '../../contexts/AppContext';
 import { savedMoviesList } from '../../utils/constants';
-import { moviesList } from '../../utils/constants';
+// import { moviesList } from '../../utils/constants';
+import { getMovies } from '../../utils/MoviesApi';
 import './App.css';
 
 export const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const location = useLocation();
-	const [movies, setMovies] = useState(moviesList);
+	const [movies, setMovies] = useState([]);
 	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
 
 	useEffect(
@@ -26,10 +27,26 @@ export const App = () => {
 		[location, setIsLoggedIn]
 	);
 
+	useEffect(() => {
+		getMovies()
+			.then(res => setMovies(res))
+			.catch(err => console.error(err));
+	}, []);
+
 	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
+
+	const getMinutesString = minutes => {
+		if (minutes % 10 === 1 && minutes % 100 !== 11) {
+			return 'минута';
+		} else if ([2, 3, 4].includes(minutes % 10) && ![12, 13, 14].includes(minutes % 100)) {
+			return 'минуты';
+		} else {
+			return 'минут';
+		}
+	};
 
 	return (
 		<div className='App'>
@@ -45,6 +62,7 @@ export const App = () => {
 					handleRemoveCard,
 					movies,
 					savedMovies,
+					getMinutesString,
 				}}
 			>
 				<Routes>
