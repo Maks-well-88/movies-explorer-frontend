@@ -1,0 +1,136 @@
+.Register {
+	margin: auto;
+	max-width: 396px;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.Register__container {
+	box-sizing: border-box;
+	padding: 22px 30px 0 30px;
+	height: 605px;
+	display: flex;
+	flex-direction: column;
+}
+
+.Register__title {
+	margin: 37px 0 40px 0;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 29px;
+}
+
+.Register__label {
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #a0a0a0;
+}
+
+.Register__field {
+	margin: 10px 0 20px 0;
+	box-sizing: border-box;
+	width: 396px;
+	padding: 15px;
+	border: none;
+	background: #f9f9f9;
+	border-radius: 8px;
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 16px;
+	color: #000000;
+}
+
+.Register__field_type_password {
+	color: #ee3465;
+}
+
+.Register__field[type='password'] {
+	margin-bottom: 0;
+}
+
+.Register__field:focus {
+	outline-color: rgba(255, 104, 56, 0.8);
+	border-radius: 2rem;
+	background-color: #ffffff;
+}
+
+.Register__info {
+	padding: 16px 0 23px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Register__info-title {
+	margin: 0;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	color: #a0a0a0;
+}
+
+.Register__signin {
+	margin-left: 6px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+.Register__info-link {
+	text-decoration: none;
+	color: #ff6838;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.Register__info-link:hover {
+	opacity: 0.7;
+}
+
+@media screen and (max-width: 420px) {
+	.Register {
+		align-items: flex-start;
+	}
+
+	.Register__container {
+		padding: 56px 30px 0 30px;
+		max-width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		box-sizing: border-box;
+	}
+
+	.Register__title {
+		margin-top: 47px;
+		margin-bottom: 80px;
+	}
+
+	.Register__field {
+		max-width: 100%;
+		margin: 10px 0 20px 0;
+	}
+
+	.Register__info {
+		padding: 14px 0 30px 0;
+	}
+
+	.Register__info-title {
+		font-size: 12px;
+		line-height: 15px;
+	}
+
+	.Register__signin {
+		font-size: 12px;
+		line-height: 15px;
+	}
+}

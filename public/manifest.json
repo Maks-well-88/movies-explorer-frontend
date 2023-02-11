@@ -1,0 +1,26 @@
+{
+  "short_name": "Movies Explorer",
+  "name": "Movies Explorer",
+  "icons": [
+     {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "description": "Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете"
+}

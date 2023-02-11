@@ -1,0 +1,11 @@
+.ErrorMessage {
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #ff004c;
+}
+
+.ErrorMessage_position_profile {
+	margin: 0;
+	text-align: center;
+}

@@ -1,0 +1,27 @@
+.MovieButton__button {
+	cursor: pointer;
+	width: 100px;
+	height: 29px;
+	border: none;
+	border-radius: 30px;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.MovieButton__button:hover {
+	opacity: 0.8;
+}
+
+.MovieButton__button_type_delete {
+	background: url('../../images/remove-button.svg') center center / 8px 8px no-repeat, #f9f9f9;
+}
+
+.MovieButton__button_type_saved {
+	background: url('../../images/saved-icon.svg') center center / 8px 8px no-repeat, #ee3465;
+}
+
+.MovieButton__button_type_save {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 11px;
+	color: #000000;
+}
