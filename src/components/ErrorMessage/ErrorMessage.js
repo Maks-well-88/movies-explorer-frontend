@@ -10,6 +10,12 @@ export const ErrorMessage = ({ position, message }) => {
 		case 'search':
 			errorStyle = 'ErrorMessage ErrorMessage_position_search';
 			break;
+		case 'inputError':
+			errorStyle = 'ErrorMessage ErrorMessage_position_input-error';
+			break;
+		case 'submitError':
+			errorStyle = 'ErrorMessage ErrorMessage_position_submit-error';
+			break;
 		default:
 			errorStyle = 'ErrorMessage';
 	}

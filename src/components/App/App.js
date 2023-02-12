@@ -23,6 +23,7 @@ export const App = () => {
 	const location = useLocation();
 	const [movies, setMovies] = useState([]);
 	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
+	const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
 	useEffect(() => {
 		const store = JSON.parse(localStorage.getItem('movies'));
@@ -65,7 +66,15 @@ export const App = () => {
 			>
 				<Routes>
 					<Route path='/' element={<Main />} />
-					<Route path='/signup' element={<Register />} />
+					<Route
+						path='/signup'
+						element={
+							<Register
+								submitButtonDisabled={submitButtonDisabled}
+								setSubmitButtonDisabled={setSubmitButtonDisabled}
+							/>
+						}
+					/>
 					<Route path='/signin' element={<Login />} />
 					<Route
 						path='/movies'
