@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { Main } from '../Main/Main';
@@ -9,6 +9,7 @@ import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 import { NotFound } from '../NotFound/NotFound';
 import { Menu } from '../Menu/Menu';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { AppContext } from '../../contexts/AppContext';
 import { savedMoviesList } from '../../utils/constants';
 import './App.css';
@@ -22,11 +23,6 @@ export const App = () => {
 	const location = useLocation();
 	const [movies, setMovies] = useState([]);
 	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
-
-	useEffect(
-		() => (location.pathname === '/' ? setIsLoggedIn(false) : setIsLoggedIn(true)),
-		[location, setIsLoggedIn]
-	);
 
 	useEffect(() => {
 		const store = JSON.parse(localStorage.getItem('movies'));
@@ -69,10 +65,14 @@ export const App = () => {
 			>
 				<Routes>
 					<Route path='/' element={<Main />} />
+					<Route path='/signup' element={<Register />} />
+					<Route path='/signin' element={<Login />} />
 					<Route
 						path='/movies'
 						element={
-							<Movies
+							<ProtectedRoute
+								component={Movies}
+								isLoggedIn={isLoggedIn}
 								isLoading={isLoading}
 								isChecked={isChecked}
 								setMovies={setMovies}
@@ -84,11 +84,12 @@ export const App = () => {
 							/>
 						}
 					/>
-					<Route path='/saved-movies' element={<SavedMovies />} />
-					<Route path='/signup' element={<Register />} />
-					<Route path='/signin' element={<Login />} />
-					<Route path='/profile' element={<Profile />} />
-					<Route path='*' element={<NotFound />} />
+					<Route
+						path='/saved-movies'
+						element={<ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} />}
+					/>
+					<Route path='/profile' element={<ProtectedRoute component={Profile} isLoggedIn={isLoggedIn} />} />
+					<Route path='*' element={isLoggedIn ? <NotFound /> : <Navigate to='/signin' />} />
 				</Routes>
 				<Menu />
 			</AppContext.Provider>
