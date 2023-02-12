@@ -7,8 +7,11 @@ export const ErrorMessage = ({ position, message }) => {
 		case 'profile':
 			errorStyle = 'ErrorMessage ErrorMessage_position_profile';
 			break;
+		case 'search':
+			errorStyle = 'ErrorMessage ErrorMessage_position_search';
+			break;
 		default:
-			errorStyle = '';
+			errorStyle = 'ErrorMessage';
 	}
 
 	return <p className={errorStyle}>{message}</p>;

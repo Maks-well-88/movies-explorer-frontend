@@ -11,12 +11,13 @@ import { NotFound } from '../NotFound/NotFound';
 import { Menu } from '../Menu/Menu';
 import { AppContext } from '../../contexts/AppContext';
 import { savedMoviesList } from '../../utils/constants';
-// import { moviesList } from '../../utils/constants';
-import { getMovies } from '../../utils/MoviesApi';
 import './App.css';
 
 export const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
+	const [isEmptyResponse, setIsEmptyResponse] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const location = useLocation();
 	const [movies, setMovies] = useState([]);
@@ -28,15 +29,16 @@ export const App = () => {
 	);
 
 	useEffect(() => {
-		getMovies()
-			.then(res => setMovies(res))
-			.catch(err => console.error(err));
+		const store = JSON.parse(localStorage.getItem('movies'));
+		store && setMovies(JSON.parse(localStorage.getItem('movies')));
+		setIsChecked(JSON.parse(localStorage.getItem('checkbox')));
 	}, []);
 
 	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
+	const handleChangeCheckbox = () => setIsChecked(prevState => !prevState);
 
 	const getMinutesString = minutes => {
 		if (minutes % 10 === 1 && minutes % 100 !== 11) {
@@ -67,7 +69,21 @@ export const App = () => {
 			>
 				<Routes>
 					<Route path='/' element={<Main />} />
-					<Route path='/movies' element={<Movies />} />
+					<Route
+						path='/movies'
+						element={
+							<Movies
+								isLoading={isLoading}
+								isChecked={isChecked}
+								setMovies={setMovies}
+								setIsLoading={setIsLoading}
+								onCheck={handleChangeCheckbox}
+								movies={movies}
+								isEmptyResponse={isEmptyResponse}
+								setIsEmptyResponse={setIsEmptyResponse}
+							/>
+						}
+					/>
 					<Route path='/saved-movies' element={<SavedMovies />} />
 					<Route path='/signup' element={<Register />} />
 					<Route path='/signin' element={<Login />} />

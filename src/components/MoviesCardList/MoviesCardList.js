@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-export const MoviesCardList = ({ films }) => {
+export const MoviesCardList = ({ films, isEmptyResponse }) => {
 	const [cardCount, setCardCount] = useState(12);
 	const updateCardCount = () => {
 		if (window.innerWidth <= 420) {
@@ -18,8 +18,8 @@ export const MoviesCardList = ({ films }) => {
 
 	useEffect(() => {
 		updateCardCount();
-		window.addEventListener('resize', updateCardCount);
-		return () => window.removeEventListener('resize', updateCardCount);
+		window.addEventListener('resize', () => setTimeout(updateCardCount, 1000));
+		return () => window.removeEventListener('resize', () => setTimeout(updateCardCount, 1000));
 	}, []);
 
 	const location = useLocation();
@@ -34,16 +34,24 @@ export const MoviesCardList = ({ films }) => {
 
 	return (
 		<>
-			<div className={cardListStyle}>
-				{films.slice(0, cardCount).map((film, i) => (
-					<MoviesCard key={i} film={film} />
-				))}
-			</div>
-			<div className={moreStyle}>
-				<button className='MoviesCardList__more-button' type='button'>
-					Ещё
-				</button>
-			</div>
+			{isEmptyResponse ? (
+				<div className='MoviesCardList__empty-wrapper'>
+					<p className='MoviesCardList__empty-title'>Ничего не найдено</p>
+				</div>
+			) : (
+				<div className={cardListStyle}>
+					{films.slice(0, cardCount).map((film, i) => (
+						<MoviesCard key={i} film={film} />
+					))}
+				</div>
+			)}
+			{films.length > 3 && (
+				<div className={moreStyle}>
+					<button className='MoviesCardList__more-button' type='button'>
+						Ещё
+					</button>
+				</div>
+			)}
 		</>
 	);
 };

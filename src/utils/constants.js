@@ -1,15 +1,6 @@
 import PicOne from '../images/pic-1.png';
 import PicTwo from '../images/pic-2.png';
 import PicThree from '../images/pic-3.png';
-import PicFour from '../images/pic-4.png';
-import PicFive from '../images/pic-5.png';
-import PicSix from '../images/pic-6.png';
-import PicSeven from '../images/pic-7.png';
-import PicEight from '../images/pic-8.png';
-import PicNine from '../images/pic-9.png';
-import PicTen from '../images/pic-10.png';
-import PicEleven from '../images/pic-11.png';
-import PicTwelve from '../images/pic-12.png';
 
 export const headerNavigationData = [
 	{
@@ -70,8 +61,10 @@ export const errorMessages = {
 	userExists: 'Пользователь с таким email уже существует',
 	registrationError: 'При регистрации пользователя произошла ошибка',
 	userEmailExists: 'Пользователь с таким email уже существует',
-	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректе',
+	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректен',
 	authorizationTokenWrongFormat:
 		'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
 	wrongUsernamePassword: 'Вы ввели неправильный логин или пароль',
+	keywordMissing: 'Нужно ввести ключевое слово',
+	searchError: 'Произошла ошибка. Проблема с соединением или сервер недоступен. Попробуйте позже',
 };

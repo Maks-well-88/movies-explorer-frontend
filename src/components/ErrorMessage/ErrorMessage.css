@@ -9,3 +9,15 @@
 	margin: 0;
 	text-align: center;
 }
+
+.ErrorMessage_position_search {
+	position: absolute;
+	top: 70px;
+}
+
+@media screen and (max-width: 550px) {
+	.ErrorMessage_position_search {
+		width: 100%;
+		text-align: center;
+	}
+}
