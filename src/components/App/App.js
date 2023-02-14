@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { Main } from '../Main/Main';
@@ -12,6 +12,10 @@ import { Menu } from '../Menu/Menu';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { AppContext } from '../../contexts/AppContext';
 import { savedMoviesList } from '../../utils/constants';
+import { register } from '../../utils/MainApi';
+import { login } from '../../utils/MainApi';
+import { getUser } from '../../utils/MainApi';
+import { errorMessages } from '../../utils/constants';
 import './App.css';
 
 export const App = () => {
@@ -20,10 +24,30 @@ export const App = () => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [isEmptyResponse, setIsEmptyResponse] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
-	const location = useLocation();
-	const [movies, setMovies] = useState([]);
 	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
 	const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+	const [movies, setMovies] = useState([]);
+	const [currentUser, setCurrentUser] = useState({});
+	const [serverError, setServerError] = useState('');
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		console.log('Проверка аутентификации в App', isLoggedIn);
+		const token = localStorage.getItem('token');
+		console.log('Я 1');
+		if (token) {
+			getUser(token)
+				.then(response => {
+					if (response) {
+						setIsLoggedIn(true);
+						setCurrentUser(response);
+						setServerError('');
+					}
+				})
+				.catch(error => console.error(error));
+		}
+	}, [isLoggedIn]);
 
 	useEffect(() => {
 		const store = JSON.parse(localStorage.getItem('movies'));
@@ -36,6 +60,57 @@ export const App = () => {
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
 	const handleChangeCheckbox = () => setIsChecked(prevState => !prevState);
+
+	const handleRegister = values => {
+		register(values)
+			.then(response => {
+				if (response) {
+					setIsLoggedIn(true);
+					navigate('/movies');
+					setServerError('');
+				}
+			})
+			.then(() => {
+				const { email, password } = values;
+				login({ email, password })
+					.then(data => data.token && localStorage.setItem('token', data.token))
+					.then(() => {
+						getUser(localStorage.getItem('token'))
+							.then(response => {
+								if (response) {
+									setIsLoggedIn(true);
+									setCurrentUser(response);
+									navigate('/movies');
+									setServerError('');
+								}
+							})
+							.catch(error => console.error(error));
+					})
+					.catch(error => console.error(error));
+			})
+			.catch(error => console.log(error.name));
+	};
+
+	const handleLogin = values => {
+		const { email, loginPassword } = values;
+		login({ email: email, password: loginPassword })
+			.then(data => {
+				data.token && localStorage.setItem('token', data.token);
+			})
+			.then(() => {
+				getUser(localStorage.getItem('token'))
+					.then(response => {
+						if (response) {
+							setIsLoggedIn(true);
+							setCurrentUser(response);
+							navigate('/movies');
+							setServerError('');
+						}
+					})
+					.catch(error => console.error(error));
+			})
+			.catch(error => console.error(error));
+	};
 
 	const getMinutesString = minutes => {
 		if (minutes % 10 === 1 && minutes % 100 !== 11) {
@@ -62,20 +137,18 @@ export const App = () => {
 					movies,
 					savedMovies,
 					getMinutesString,
+					serverError,
+					setSubmitButtonDisabled,
+					submitButtonDisabled,
+					setIsLoggedIn,
+					setCurrentUser,
+					setServerError,
 				}}
 			>
 				<Routes>
 					<Route path='/' element={<Main />} />
-					<Route
-						path='/signup'
-						element={
-							<Register
-								submitButtonDisabled={submitButtonDisabled}
-								setSubmitButtonDisabled={setSubmitButtonDisabled}
-							/>
-						}
-					/>
-					<Route path='/signin' element={<Login />} />
+					<Route path='/signup' element={<Register onRegister={handleRegister} />} />
+					<Route path='/signin' element={<Login onLogin={handleLogin} />} />
 					<Route
 						path='/movies'
 						element={

@@ -37,6 +37,13 @@ export const useFormWithValidation = inputValues => {
 					setErrors({ ...errors, [name]: '' });
 				}
 				break;
+			case 'loginPassword':
+				if (!value) {
+					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
+				} else {
+					setErrors({ ...errors, [name]: '' });
+				}
+				break;
 			default:
 				setErrors({ ...errors, [name]: '' });
 		}

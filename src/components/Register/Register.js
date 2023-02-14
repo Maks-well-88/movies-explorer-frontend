@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '../Logo/Logo';
 import { Form } from '../Form/Form';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { AppContext } from '../../contexts/AppContext';
 import './Register.css';
 
-export const Register = ({ submitButtonDisabled, setSubmitButtonDisabled }) => {
+export const Register = ({ onRegister }) => {
+	const { setSubmitButtonDisabled, submitButtonDisabled } = useContext(AppContext);
 	const { values, handleChange, errors, setErrors, isValid } = useFormWithValidation({
 		name: '',
 		email: '',
@@ -25,12 +27,19 @@ export const Register = ({ submitButtonDisabled, setSubmitButtonDisabled }) => {
 		isValid && setSubmitButtonDisabled(!isValid);
 	}, [setSubmitButtonDisabled, setErrors, isValid, values]);
 
+	const checkValidityOnRegister = e => {
+		e.preventDefault();
+		if (isValid) onRegister(values);
+		return null;
+	};
+
 	return (
 		<section className='Register'>
 			<div className='Register__container'>
 				<Logo />
 				<h1 className='Register__title'>Добро пожаловать!</h1>
-				<Form button={'Зарегистрироваться'} isValid={isValid} submitButtonDisabled={submitButtonDisabled}>
+
+				<Form button={'Зарегистрироваться'} onSubmitRegister={checkValidityOnRegister}>
 					<label className='Register__label' lang='en' htmlFor='name'>
 						Имя
 						<input

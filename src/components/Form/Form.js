@@ -1,23 +1,20 @@
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { AppContext } from '../../contexts/AppContext';
 import './Form.css';
 
-export const Form = ({ children, button, isValid, submitButtonDisabled }) => {
-	const registerError = 'Что-то пошло не так...';
-	const error = false;
-
-	const handleSubmit = e => {
-		e.preventDefault();
-		if (isValid) {
-			console.log('Отправка!');
-		}
-		return null;
-	};
+export const Form = ({ children, button, onSubmitRegister, onSubmitLogin }) => {
+	const { serverError, submitButtonDisabled } = useContext(AppContext);
+	const location = useLocation();
+	const registerPage = location.pathname === '/signup';
 
 	return (
-		<form className='Form' onSubmit={handleSubmit} noValidate>
+		<form className='Form' onSubmit={registerPage ? onSubmitRegister : onSubmitLogin} noValidate>
 			{children}
 			<div className='Form__error-info'>
-				{error && <ErrorMessage position='submitError' message={registerError} />}
+				{serverError && <ErrorMessage position='submitError' message={serverError} />}
 			</div>
 			<button className='Form__button' type='submit' disabled={submitButtonDisabled}>
 				{button}
