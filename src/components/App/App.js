@@ -12,11 +12,13 @@ import { Menu } from '../Menu/Menu';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { AppContext } from '../../contexts/AppContext';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { savedMoviesList } from '../../utils/constants';
 import { register } from '../../utils/MainApi';
 import { login } from '../../utils/MainApi';
 import { getUser } from '../../utils/MainApi';
 import { updateUser } from '../../utils/MainApi.js';
+import { saveMovie } from '../../utils/MainApi';
+import { getSavedMovie } from '../../utils/MainApi';
+import { deleteMovie } from '../../utils/MainApi';
 import { errorMessages } from '../../utils/constants';
 import './App.css';
 
@@ -26,7 +28,7 @@ export const App = () => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [isEmptyResponse, setIsEmptyResponse] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
-	const [savedMovies, setSavedMovies] = useState(savedMoviesList);
+	const [savedMovies, setSavedMovies] = useState([]);
 	const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [currentUser, setCurrentUser] = useState({});
@@ -46,6 +48,12 @@ export const App = () => {
 					}
 				})
 				.catch(error => console.error(error));
+
+			getSavedMovie(token)
+				.then(films => {
+					films && setSavedMovies(films);
+				})
+				.catch(error => console.error(error));
 		}
 	}, [isLoggedIn]);
 
@@ -55,7 +63,6 @@ export const App = () => {
 		setIsChecked(JSON.parse(localStorage.getItem('checkbox')));
 	}, []);
 
-	const handleRemoveCard = id => setSavedMovies(savedMovies.filter(film => film.id !== id));
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
@@ -135,6 +142,28 @@ export const App = () => {
 		}
 	};
 
+	const handleSaveFilm = savedFilm => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			saveMovie(token, savedFilm)
+				.then(film => {
+					if (film) setSavedMovies(prevState => [...prevState, film]);
+				})
+				.catch(error => console.error(error));
+		}
+	};
+
+	const handleDeleteFilm = savedFilm => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			deleteMovie(token, savedFilm._id)
+				.then(response => {
+					setSavedMovies(savedMovies.filter(film => film.movieId !== savedFilm.movieId));
+				})
+				.catch(error => console.error(error));
+		}
+	};
+
 	const getMinutesString = minutes => {
 		if (minutes % 10 === 1 && minutes % 100 !== 11) {
 			return 'минута';
@@ -157,7 +186,6 @@ export const App = () => {
 						handleOpenMenu,
 						handleCloseMenuEsc,
 						handleCloseMenu,
-						handleRemoveCard,
 						movies,
 						savedMovies,
 						getMinutesString,
@@ -168,6 +196,8 @@ export const App = () => {
 						setCurrentUser,
 						setServerError,
 						currentUser,
+						handleSaveFilm,
+						handleDeleteFilm,
 					}}
 				>
 					<Routes>

@@ -30,30 +30,6 @@ export const footerNavigationData = [
 	},
 ];
 
-export const savedMoviesList = [
-	{
-		id: 1,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicOne,
-		saved: true,
-	},
-	{
-		id: 2,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicTwo,
-		saved: true,
-	},
-	{
-		id: 3,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicThree,
-		saved: true,
-	},
-];
-
 export const errorMessages = {
 	profileError: 'При обновлении профиля произошла ошибка',
 	serverError: '500, на сервере произошла ошибка',

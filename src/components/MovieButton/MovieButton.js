@@ -1,37 +1,30 @@
-import { useContext, useState } from 'react';
-
-import { AppContext } from '../../contexts/AppContext';
 import './MovieButton.css';
 
-export const MovieButton = ({ film }) => {
-	const [savedButton, setSavedButton] = useState(false);
-	const { handleRemoveCard } = useContext(AppContext);
-
-	const onDelete = () => handleRemoveCard(film.id);
-	const handleButtonClick = () => setSavedButton(!savedButton);
-
+export const MovieButton = ({ moviesPage, onSaveFilm, isSavedFilm, onDeleteFilm }) => {
 	return (
 		<>
-			{film.saved ? (
+			{moviesPage ? (
+				isSavedFilm ? (
+					<button
+						className='MovieButton__button MovieButton__button_type_saved'
+						type='button'
+						onClick={onDeleteFilm}
+					></button>
+				) : (
+					<button
+						className='MovieButton__button MovieButton__button_type_save'
+						type='button'
+						onClick={onSaveFilm}
+					>
+						Сохранить
+					</button>
+				)
+			) : (
 				<button
 					className='MovieButton__button MovieButton__button_type_delete'
 					type='button'
-					onClick={onDelete}
+					onClick={onDeleteFilm}
 				></button>
-			) : savedButton ? (
-				<button
-					className='MovieButton__button MovieButton__button_type_saved'
-					type='button'
-					onClick={handleButtonClick}
-				></button>
-			) : (
-				<button
-					className='MovieButton__button MovieButton__button_type_save'
-					type='button'
-					onClick={handleButtonClick}
-				>
-					Сохранить
-				</button>
 			)}
 		</>
 	);

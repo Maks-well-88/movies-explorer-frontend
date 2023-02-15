@@ -1,5 +1,6 @@
 .MoviesCard {
 	cursor: pointer;
+	max-height: 319px;
 	display: flex;
 	flex-direction: column;
 	background: #fdfdfd;
