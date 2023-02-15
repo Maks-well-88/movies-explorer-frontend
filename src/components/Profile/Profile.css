@@ -17,6 +17,22 @@
 	text-align: center;
 }
 
+.Profile__greeting_type_edit {
+	margin-bottom: 115px;
+}
+
+.Profile__updated {
+	margin: 74px 0 124px 0;
+	color: #ffffff;
+	background-color: #2be080;
+	text-transform: uppercase;
+	border-radius: 12px;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 29px;
+	text-align: center;
+}
+
 .Profile__user-name {
 	max-width: 100%;
 	display: flex;
@@ -48,15 +64,31 @@
 	line-height: 13px;
 }
 
+.Profile__field {
+	margin: 0;
+	box-sizing: border-box;
+	padding: 8px 10px;
+	border: none;
+	background: #f9f9f9;
+	border-radius: 2rem;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #000000;
+}
+
+.Profile__field:focus {
+	outline-color: rgba(52, 86, 243, 0.8);
+	border-radius: 2rem;
+	background-color: #ffffff;
+}
+
 .Profile__error-container {
-	margin-top: 170px;
-	min-height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	min-height: 20px;
 }
 
 .Profile__buttons-container {
+	margin-top: 220px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -87,16 +119,6 @@
 	color: #c2c2c2;
 }
 
-.Profile__button_type_save {
-	height: 45px;
-	background-color: #3456f3;
-	border-radius: 3px;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 17px;
-	color: #ffffff;
-}
-
 .Profile__button_type_edit {
 	margin-bottom: 16px;
 }
@@ -111,8 +133,8 @@
 		margin: 236px 0 97px 0;
 	}
 
-	.Profile__error-container {
-		margin-top: 160px;
+	.Profile__updated {
+		margin: 236px 0 97px 0;
 	}
 }
 
@@ -129,14 +151,12 @@
 		margin: 70px 0 81px 0;
 	}
 
-	.Profile__error-container {
-		margin-top: 15px;
-		flex-grow: 1;
-		align-items: flex-end;
-		padding-bottom: 15px;
+	.Profile__updated {
+		margin: 70px 0 81px 0;
 	}
 
 	.Profile__buttons-container {
+		margin-top: auto;
 		justify-content: end;
 	}
 

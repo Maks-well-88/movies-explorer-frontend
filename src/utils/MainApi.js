@@ -45,3 +45,20 @@ export const getUser = token => {
 		})
 		.catch(error => console.error(error));
 };
+
+export const updateUser = (token, body) => {
+	return fetch('http://localhost:3000/api/users/me', {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+			Origin: 'http://localhost:3001',
+			'Access-Control-Request-Headers': 'Content-Type',
+		},
+		body: JSON.stringify(body),
+	})
+		.then(response => {
+			return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
+		})
+		.catch(error => console.error(error));
+};

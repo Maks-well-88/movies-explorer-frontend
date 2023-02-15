@@ -13,7 +13,7 @@ export const useFormWithValidation = inputValues => {
 			case 'name':
 				if (!value) {
 					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
-				} else if (!value.match(/^[a-zA-Zа-яА-Яs-\s]+$/)) {
+				} else if (!value.match(/^[a-zA-Zа-яА-Я\s-]+$/)) {
 					setErrors({ ...errors, [name]: 'Недопустимое имя пользователя' });
 				} else {
 					setErrors({ ...errors, [name]: '' });
@@ -60,5 +60,5 @@ export const useFormWithValidation = inputValues => {
 		[setValues, setErrors, setIsValid]
 	);
 
-	return { values, handleChange, errors, setErrors, isValid, resetForm };
+	return { values, setValues, handleChange, errors, setErrors, isValid, setIsValid, resetForm };
 };

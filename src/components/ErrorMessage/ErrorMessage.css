@@ -5,11 +5,6 @@
 	color: #ff004c;
 }
 
-.ErrorMessage_position_profile {
-	margin: 0;
-	text-align: center;
-}
-
 .ErrorMessage_position_search {
 	position: absolute;
 	top: 70px;

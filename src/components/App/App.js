@@ -11,10 +11,12 @@ import { NotFound } from '../NotFound/NotFound';
 import { Menu } from '../Menu/Menu';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { AppContext } from '../../contexts/AppContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { savedMoviesList } from '../../utils/constants';
 import { register } from '../../utils/MainApi';
 import { login } from '../../utils/MainApi';
 import { getUser } from '../../utils/MainApi';
+import { updateUser } from '../../utils/MainApi.js';
 import { errorMessages } from '../../utils/constants';
 import './App.css';
 
@@ -33,15 +35,13 @@ export const App = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log('Проверка аутентификации в App', isLoggedIn);
 		const token = localStorage.getItem('token');
-		console.log('Я 1');
 		if (token) {
 			getUser(token)
 				.then(response => {
 					if (response) {
 						setIsLoggedIn(true);
-						setCurrentUser(response);
+						setCurrentUser({ data: response });
 						setServerError('');
 					}
 				})
@@ -79,7 +79,7 @@ export const App = () => {
 							.then(response => {
 								if (response) {
 									setIsLoggedIn(true);
-									setCurrentUser(response);
+									setCurrentUser({ data: response });
 									navigate('/movies');
 									setServerError('');
 								}
@@ -88,7 +88,7 @@ export const App = () => {
 					})
 					.catch(error => console.error(error));
 			})
-			.catch(error => console.log(error.name));
+			.catch(error => console.error(error));
 	};
 
 	const handleLogin = values => {
@@ -102,7 +102,7 @@ export const App = () => {
 					.then(response => {
 						if (response) {
 							setIsLoggedIn(true);
-							setCurrentUser(response);
+							setCurrentUser({ data: response });
 							navigate('/movies');
 							setServerError('');
 						}
@@ -110,6 +110,29 @@ export const App = () => {
 					.catch(error => console.error(error));
 			})
 			.catch(error => console.error(error));
+	};
+
+	const handleLogout = () => {
+		setIsLoggedIn(false);
+		localStorage.removeItem('token');
+		navigate('/');
+	};
+
+	const handleUpdateUserProfile = values => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			updateUser(token, values)
+				.then(response => {
+					if (response) {
+						setCurrentUser({ data: response, updated: true });
+						setTimeout(() => {
+							setCurrentUser({ data: response });
+						}, 3000);
+						setServerError('');
+					}
+				})
+				.catch(error => console.error(error));
+		}
 	};
 
 	const getMinutesString = minutes => {
@@ -124,57 +147,70 @@ export const App = () => {
 
 	return (
 		<div className='App'>
-			<AppContext.Provider
-				value={{
-					location,
-					isLoggedIn,
-					isOpenedMenu,
-					setIsOpenedMenu,
-					handleOpenMenu,
-					handleCloseMenuEsc,
-					handleCloseMenu,
-					handleRemoveCard,
-					movies,
-					savedMovies,
-					getMinutesString,
-					serverError,
-					setSubmitButtonDisabled,
-					submitButtonDisabled,
-					setIsLoggedIn,
-					setCurrentUser,
-					setServerError,
-				}}
-			>
-				<Routes>
-					<Route path='/' element={<Main />} />
-					<Route path='/signup' element={<Register onRegister={handleRegister} />} />
-					<Route path='/signin' element={<Login onLogin={handleLogin} />} />
-					<Route
-						path='/movies'
-						element={
-							<ProtectedRoute
-								component={Movies}
-								isLoggedIn={isLoggedIn}
-								isLoading={isLoading}
-								isChecked={isChecked}
-								setMovies={setMovies}
-								setIsLoading={setIsLoading}
-								onCheck={handleChangeCheckbox}
-								movies={movies}
-								isEmptyResponse={isEmptyResponse}
-								setIsEmptyResponse={setIsEmptyResponse}
-							/>
-						}
-					/>
-					<Route
-						path='/saved-movies'
-						element={<ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} />}
-					/>
-					<Route path='/profile' element={<ProtectedRoute component={Profile} isLoggedIn={isLoggedIn} />} />
-					<Route path='*' element={isLoggedIn ? <NotFound /> : <Navigate to='/signin' />} />
-				</Routes>
-				<Menu />
-			</AppContext.Provider>
+			<CurrentUserContext.Provider value={{ currentUser }}>
+				<AppContext.Provider
+					value={{
+						location,
+						isLoggedIn,
+						isOpenedMenu,
+						setIsOpenedMenu,
+						handleOpenMenu,
+						handleCloseMenuEsc,
+						handleCloseMenu,
+						handleRemoveCard,
+						movies,
+						savedMovies,
+						getMinutesString,
+						serverError,
+						setSubmitButtonDisabled,
+						submitButtonDisabled,
+						setIsLoggedIn,
+						setCurrentUser,
+						setServerError,
+						currentUser,
+					}}
+				>
+					<Routes>
+						<Route path='/' element={<Main />} />
+						<Route path='/signup' element={<Register onRegister={handleRegister} />} />
+						<Route path='/signin' element={<Login onLogin={handleLogin} />} />
+						<Route
+							path='/movies'
+							element={
+								<ProtectedRoute
+									component={Movies}
+									isLoggedIn={isLoggedIn}
+									isLoading={isLoading}
+									isChecked={isChecked}
+									setMovies={setMovies}
+									setIsLoading={setIsLoading}
+									onCheck={handleChangeCheckbox}
+									movies={movies}
+									isEmptyResponse={isEmptyResponse}
+									setIsEmptyResponse={setIsEmptyResponse}
+								/>
+							}
+						/>
+						<Route
+							path='/saved-movies'
+							element={<ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} />}
+						/>
+						<Route
+							path='/profile'
+							element={
+								<ProtectedRoute
+									component={Profile}
+									isLoggedIn={isLoggedIn}
+									onUpdateUser={handleUpdateUserProfile}
+									onLogout={handleLogout}
+								/>
+							}
+						/>
+						<Route path='*' element={isLoggedIn ? <NotFound /> : <Navigate to='/signin' />} />
+					</Routes>
+					<Menu />
+				</AppContext.Provider>
+			</CurrentUserContext.Provider>
 		</div>
 	);
 };

@@ -47,6 +47,7 @@ export const Register = ({ onRegister }) => {
 							name='name'
 							type='text'
 							value={values.name}
+							pattern='^[a-zA-Zа-яА-Я\s-]+$'
 							onChange={handleChange}
 							autoComplete='off'
 							placeholder='Введите ваше имя'
@@ -66,6 +67,7 @@ export const Register = ({ onRegister }) => {
 							name='email'
 							type='email'
 							value={values.email}
+							pattern='^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$'
 							onChange={handleChange}
 							autoComplete='off'
 							placeholder='Введите электронную почту'

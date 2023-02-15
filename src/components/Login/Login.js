@@ -46,6 +46,7 @@ export const Login = ({ onLogin }) => {
 							name='email'
 							type='email'
 							value={values.email}
+							pattern='^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$'
 							onChange={handleChange}
 							autoComplete='off'
 							placeholder='Введите электронную почту'
