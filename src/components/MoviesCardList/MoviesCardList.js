@@ -4,9 +4,9 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { searchMessages } from '../../utils/constants';
 import './MoviesCardList.css';
 
-export const MoviesCardList = ({ page, searchResultNotification, films }) => {
+export const MoviesCardList = ({ page, searchResultNotification, movies }) => {
 	const [cardCount, setCardCount] = useState(12);
-	const allFilmsCount = films.length;
+	const allMoviesCount = movies.length;
 	const moreStyle =
 		page === '/movies' ? 'MoviesCardList__more' : 'MoviesCardList__more MoviesCardList__more_active';
 	const cardListStyle =
@@ -40,7 +40,7 @@ export const MoviesCardList = ({ page, searchResultNotification, films }) => {
 
 	return (
 		<>
-			{!films.length && !page ? (
+			{!movies.length && !page ? (
 				<div className='MoviesCardList__empty-wrapper'>
 					<p className='MoviesCardList__empty-title'>
 						{searchResultNotification.includes(searchMessages.notFound) ? 'Ничего не найдено' : ''}
@@ -49,14 +49,14 @@ export const MoviesCardList = ({ page, searchResultNotification, films }) => {
 			) : (
 				<div className={cardListStyle}>
 					{!page
-						? films.slice(0, cardCount).map(film => <MoviesCard key={film.id} film={film} page={page} />)
-						: films.map(film => <MoviesCard key={film._id} film={film} page={page} />)}
+						? movies.slice(0, cardCount).map(movie => <MoviesCard key={movie.id} movie={movie} page={page} />)
+						: movies.map(movie => <MoviesCard key={movie._id} movie={movie} page={page} />)}
 				</div>
 			)}
 
-			{films.length > 0 && !page && (
+			{movies.length > 0 && !page && (
 				<div className={moreStyle}>
-					{cardCount < allFilmsCount && (
+					{cardCount < allMoviesCount && (
 						<button className='MoviesCardList__more-button' type='button' onClick={handleShowMoreCards}>
 							Ещё
 						</button>

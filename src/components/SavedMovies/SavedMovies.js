@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { AppContext } from '../../contexts/AppContext';
 import { Header } from '../Header/Header';
@@ -10,13 +10,16 @@ import { useForm } from '../../hooks/useForm';
 import { moviesFilter } from '../../utils/functions/moviesFilter';
 import './SavedMovies.css';
 
-export const SavedMovies = () => {
+export const SavedMovies = ({ filteredMovies, setFilteredMovies }) => {
 	const { savedMovies, location } = useContext(AppContext);
 	const [errorMessage, setErrorMessage] = useState('');
 	const { values, handleChange } = useForm({ search: '' });
-	const [filteredMovies, setFilteredMovies] = useState(savedMovies);
 	const [filterChecked, setFilterChecked] = useState(false);
 	const savedMoviesPage = location.pathname;
+
+	useEffect(() => {
+		setFilteredMovies(savedMovies);
+	}, [savedMovies, setFilteredMovies]);
 
 	const handleChangeCheckbox = () => {
 		setFilterChecked(!filterChecked);
@@ -48,7 +51,7 @@ export const SavedMovies = () => {
 				errorMessage={errorMessage}
 			/>
 			<main>
-				<MoviesCardList page={savedMoviesPage} films={filteredMovies} />
+				<MoviesCardList page={savedMoviesPage} movies={filteredMovies} />
 			</main>
 			<Footer />
 		</>

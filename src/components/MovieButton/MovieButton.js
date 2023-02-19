@@ -1,20 +1,22 @@
 import './MovieButton.css';
 
-export const MovieButton = ({ page, onSaveFilm, isSavedFilm, onDeleteFilm }) => {
+// если не MoviesPage
+
+export const MovieButton = ({ page, onSaveMovie, savedMovie, onDeleteMovie }) => {
 	return (
 		<>
 			{!page ? (
-				isSavedFilm ? (
+				savedMovie ? (
 					<button
 						className='MovieButton__button MovieButton__button_type_saved'
 						type='button'
-						onClick={onDeleteFilm}
+						onClick={onDeleteMovie}
 					></button>
 				) : (
 					<button
 						className='MovieButton__button MovieButton__button_type_save'
 						type='button'
-						onClick={onSaveFilm}
+						onClick={onSaveMovie}
 					>
 						Сохранить
 					</button>
@@ -23,7 +25,7 @@ export const MovieButton = ({ page, onSaveFilm, isSavedFilm, onDeleteFilm }) => 
 				<button
 					className='MovieButton__button MovieButton__button_type_delete'
 					type='button'
-					onClick={onDeleteFilm}
+					onClick={onDeleteMovie}
 				></button>
 			)}
 		</>

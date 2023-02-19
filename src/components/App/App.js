@@ -27,6 +27,7 @@ export const App = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const [savedMovies, setSavedMovies] = useState([]);
+	const [filteredMovies, setFilteredMovies] = useState([]);
 	const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [currentUser, setCurrentUser] = useState({});
@@ -50,10 +51,15 @@ export const App = () => {
 			getSavedMovie(token)
 				.then(movies => {
 					movies && setSavedMovies(movies.filter(movie => movie.ownwer === currentUser._id));
+					movies && setFilteredMovies(movies.filter(movie => movie.ownwer === currentUser._id));
 				})
 				.catch(error => console.error(error));
 		}
 	}, [currentUser._id, isLoggedIn]);
+
+	useEffect(() => {
+		setFilteredMovies(filteredMovies);
+	}, [filteredMovies, setFilteredMovies]);
 
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
@@ -136,23 +142,29 @@ export const App = () => {
 		}
 	};
 
-	const handleSaveFilm = savedFilm => {
+	const handleSaveMovie = savedMovie => {
 		const token = localStorage.getItem('token');
 		if (token) {
-			saveMovie(token, savedFilm)
-				.then(film => {
-					if (film) setSavedMovies(prevState => [...prevState, film]);
+			saveMovie(token, savedMovie)
+				.then(movie => {
+					if (movie) {
+						setSavedMovies(prevState => [...prevState, movie]);
+						setFilteredMovies(prevState => [...prevState, movie]);
+					}
 				})
 				.catch(error => console.error(error));
 		}
 	};
 
-	const handleDeleteFilm = savedFilm => {
+	const handleDeleteMovie = movieToBeDeleted => {
 		const token = localStorage.getItem('token');
 		if (token) {
-			deleteMovie(token, savedFilm._id)
+			deleteMovie(token, movieToBeDeleted._id)
 				.then(response => {
-					setSavedMovies(savedMovies.filter(film => film.movieId !== savedFilm.movieId));
+					setSavedMovies(savedMovies.filter(savedMovie => savedMovie.movieId !== movieToBeDeleted.movieId));
+					setFilteredMovies(
+						filteredMovies.filter(filteredMovie => filteredMovie.movieId !== movieToBeDeleted.movieId)
+					);
 				})
 				.catch(error => console.error(error));
 		}
@@ -174,8 +186,8 @@ export const App = () => {
 						submitButtonDisabled,
 						serverError,
 						setServerError,
-						handleSaveFilm,
-						handleDeleteFilm,
+						handleSaveMovie,
+						handleDeleteMovie,
 					}}
 				>
 					<Routes>
@@ -188,7 +200,16 @@ export const App = () => {
 								<ProtectedRoute component={Movies} isLoading={isLoading} setIsLoading={setIsLoading} />
 							}
 						/>
-						<Route path='/saved-movies' element={<ProtectedRoute component={SavedMovies} />} />
+						<Route
+							path='/saved-movies'
+							element={
+								<ProtectedRoute
+									component={SavedMovies}
+									filteredMovies={filteredMovies}
+									setFilteredMovies={setFilteredMovies}
+								/>
+							}
+						/>
 						<Route
 							path='/profile'
 							element={

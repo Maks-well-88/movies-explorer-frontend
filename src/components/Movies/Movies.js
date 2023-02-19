@@ -23,8 +23,9 @@ export const Movies = props => {
 	useEffect(() => {
 		const checkbox = JSON.parse(localStorage.getItem('checkbox'));
 		const movies = JSON.parse(localStorage.getItem('movies'));
+		const query = localStorage.getItem('query');
 		movies && setMovies(JSON.parse(localStorage.getItem('movies')));
-		setValues({ search: localStorage.getItem('query') });
+		query && setValues({ search: localStorage.getItem('query') });
 		setFilterChecked(checkbox ? checkbox : false);
 	}, [setValues, setMovies]);
 
@@ -72,7 +73,7 @@ export const Movies = props => {
 				{props.isLoading ? (
 					<Preloader />
 				) : (
-					<MoviesCardList searchResultNotification={searchResultNotification} films={movies} />
+					<MoviesCardList searchResultNotification={searchResultNotification} movies={movies} />
 				)}
 			</main>
 			<Footer />
