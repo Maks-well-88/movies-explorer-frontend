@@ -1,9 +1,9 @@
 export const register = body => {
-	return fetch('http://localhost:3000/api/signup', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/signup', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 		body: JSON.stringify(body),
@@ -15,11 +15,11 @@ export const register = body => {
 };
 
 export const login = body => {
-	return fetch('http://localhost:3000/api/signin', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/signin', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 		body: JSON.stringify(body),
@@ -31,12 +31,12 @@ export const login = body => {
 };
 
 export const getUser = token => {
-	return fetch('http://localhost:3000/api/users/me', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/users/me', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 	})
@@ -47,12 +47,12 @@ export const getUser = token => {
 };
 
 export const updateUser = (token, body) => {
-	return fetch('http://localhost:3000/api/users/me', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/users/me', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 		body: JSON.stringify(body),
@@ -64,12 +64,12 @@ export const updateUser = (token, body) => {
 };
 
 export const saveMovie = (token, body) => {
-	return fetch('http://localhost:3000/api/movies', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/movies', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 		body: JSON.stringify({
@@ -93,12 +93,12 @@ export const saveMovie = (token, body) => {
 };
 
 export const getSavedMovie = token => {
-	return fetch('http://localhost:3000/api/movies', {
+	return fetch('https://api.deep-frontend.nomoredomains.rocks/api/movies', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 	})
@@ -109,12 +109,12 @@ export const getSavedMovie = token => {
 };
 
 export const deleteMovie = (token, id) => {
-	return fetch(`http://localhost:3000/api/movies/${id}`, {
+	return fetch(`https://api.deep-frontend.nomoredomains.rocks/api/movies/${id}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
-			Origin: 'http://localhost:3001',
+			Origin: 'https://deep-frontend.nomoredomains.rocks',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 	})
