@@ -22,3 +22,11 @@ HTML, CSS, REACT, USE-STATE, USE-EFFECT, USE-CONTEXT, REACT-ROUTER.
 ## Пулл-реквест
 
 Исследовать пулл-реквест можно [здесь](https://github.com/Maks-well-88/movies-explorer-frontend/pull/2).
+
+## Backend
+
+Расположен [здесь](https://api.deep-frontend.nomoredomains.rocks).
+
+## Frontend
+
+Расположен [здесь](https://deep-frontend.nomoredomains.rocks).
