@@ -1,13 +1,11 @@
 import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { AppContext } from '../../contexts/AppContext';
 import './Form.css';
 
 export const Form = ({ children, button, onSubmitRegister, onSubmitLogin, onSubmitUpdateUser }) => {
-	const { serverError, submitButtonDisabled } = useContext(AppContext);
-	const location = useLocation();
+	const { location, serverError, submitButtonDisabled } = useContext(AppContext);
 	const registerPage = location.pathname === '/signup';
 	const loginPage = location.pathname === '/signin';
 	const profilePage = location.pathname === '/profile';

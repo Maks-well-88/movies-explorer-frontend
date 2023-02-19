@@ -22,7 +22,8 @@ export const Movies = props => {
 
 	useEffect(() => {
 		const checkbox = JSON.parse(localStorage.getItem('checkbox'));
-		setMovies(JSON.parse(localStorage.getItem('movies')));
+		const movies = JSON.parse(localStorage.getItem('movies'));
+		movies && setMovies(JSON.parse(localStorage.getItem('movies')));
 		setValues({ search: localStorage.getItem('query') });
 		setFilterChecked(checkbox ? checkbox : false);
 	}, [setValues, setMovies]);

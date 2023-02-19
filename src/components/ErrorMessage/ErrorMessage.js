@@ -4,7 +4,7 @@ export const ErrorMessage = ({ position, message }) => {
 	let errorStyle;
 
 	switch (position) {
-		case 'search':
+		case 'searchError':
 			errorStyle = 'ErrorMessage ErrorMessage_position_search';
 			break;
 		case 'inputError':

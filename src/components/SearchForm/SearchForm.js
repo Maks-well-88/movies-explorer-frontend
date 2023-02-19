@@ -21,7 +21,7 @@ export const SearchForm = props => {
 					<button className='SearchForm__submit-button' type='submit' />
 				</div>
 				<FilterCheckbox checked={props.isChecked} onCheck={props.handleChangeCheckbox} />
-				{props.errorMessage && <ErrorMessage position={'search'} message={props.errorMessage} />}
+				{props.errorMessage && <ErrorMessage position={'searchError'} message={props.errorMessage} />}
 			</fieldset>
 		</form>
 	);

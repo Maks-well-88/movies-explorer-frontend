@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+
+import { inputValidationMessages, regExps } from '../utils/constants';
 
 export const useFormWithValidation = inputValues => {
 	const [values, setValues] = useState(inputValues);
@@ -12,34 +14,34 @@ export const useFormWithValidation = inputValues => {
 		switch (name) {
 			case 'name':
 				if (!value) {
-					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
-				} else if (!value.match(/^[a-zA-Zа-яА-Я\s-]+$/)) {
-					setErrors({ ...errors, [name]: 'Недопустимое имя пользователя' });
+					setErrors({ ...errors, [name]: inputValidationMessages.cantBeBlank });
+				} else if (!value.match(regExps.nameRegExp)) {
+					setErrors({ ...errors, [name]: inputValidationMessages.invalidUsername });
 				} else {
 					setErrors({ ...errors, [name]: '' });
 				}
 				break;
 			case 'email':
 				if (!value) {
-					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
-				} else if (!value.match(/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/)) {
-					setErrors({ ...errors, [name]: 'Некорректный адрес электронной почты' });
+					setErrors({ ...errors, [name]: inputValidationMessages.cantBeBlank });
+				} else if (!value.match(regExps.emailRegExp)) {
+					setErrors({ ...errors, [name]: inputValidationMessages.incorrectEmail });
 				} else {
 					setErrors({ ...errors, [name]: '' });
 				}
 				break;
 			case 'password':
 				if (!value) {
-					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
-				} else if (!value.match(/[A-Za-z0-9]{6,}/)) {
-					setErrors({ ...errors, [name]: 'Пароль не может быть короче 6 символов' });
+					setErrors({ ...errors, [name]: inputValidationMessages.cantBeBlank });
+				} else if (!value.match(regExps.passRegExp)) {
+					setErrors({ ...errors, [name]: inputValidationMessages.tooShortPassword });
 				} else {
 					setErrors({ ...errors, [name]: '' });
 				}
 				break;
 			case 'loginPassword':
 				if (!value) {
-					setErrors({ ...errors, [name]: 'Это поле не может быть пустым' });
+					setErrors({ ...errors, [name]: inputValidationMessages.cantBeBlank });
 				} else {
 					setErrors({ ...errors, [name]: '' });
 				}
@@ -51,14 +53,5 @@ export const useFormWithValidation = inputValues => {
 		setIsValid(event.target.closest('form').checkValidity());
 	};
 
-	const resetForm = useCallback(
-		(newValues = {}, newErrors = {}, newIsValid = false) => {
-			setValues(newValues);
-			setErrors(newErrors);
-			setIsValid(newIsValid);
-		},
-		[setValues, setErrors, setIsValid]
-	);
-
-	return { values, setValues, handleChange, errors, setErrors, isValid, setIsValid, resetForm };
+	return { values, setValues, handleChange, errors, setErrors, isValid, setIsValid };
 };

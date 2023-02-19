@@ -41,6 +41,19 @@ export const errorMessages = {
 	keywordMissing: 'Нужно ввести ключевое слово',
 };
 
+export const inputValidationMessages = {
+	cantBeBlank: 'Это поле не может быть пустым',
+	invalidUsername: 'Недопустимое имя пользователя',
+	incorrectEmail: 'Некорректный адрес электронной почты',
+	tooShortPassword: 'Пароль не может быть короче 6 символов',
+};
+
+export const regExps = {
+	emailRegExp: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
+	nameRegExp: /^[a-zA-Zа-яА-Я\s-]+$/,
+	passRegExp: /[A-Za-z0-9]{6,}/,
+};
+
 export const searchMessages = {
 	notFound: 'Ничего не найдено',
 };
