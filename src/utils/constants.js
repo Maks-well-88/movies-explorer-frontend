@@ -27,18 +27,15 @@ export const footerNavigationData = [
 ];
 
 export const errorMessages = {
-	profileError: 'При обновлении профиля произошла ошибка',
-	serverError: '500, на сервере произошла ошибка',
-	notFound: '404 Страница по указанному маршруту не найдена',
-	userExists: 'Пользователь с таким email уже существует',
-	registrationError: 'При регистрации пользователя произошла ошибка',
-	userEmailExists: 'Пользователь с таким email уже существует',
-	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректен',
-	authorizationTokenWrongFormat:
-		'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
+	keywordMissing: 'Нужно ввести ключевое слово',
 	wrongUsernamePassword: 'Вы ввели неправильный логин или пароль',
 	searchError: 'Произошла ошибка. Проблема с соединением или сервер недоступен. Попробуйте позже',
-	keywordMissing: 'Нужно ввести ключевое слово',
+	profileError: 'При обновлении профиля произошла ошибка',
+	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректен',
+	serverError: '500, на сервере произошла ошибка',
+	userEmailExists: 'Пользователь с таким email уже существует',
+	registrationError: 'При регистрации пользователя произошла ошибка',
+	authorizationTokenWrongFormat: 'Токен не передан или передан не в том формате',
 };
 
 export const inputValidationMessages = {

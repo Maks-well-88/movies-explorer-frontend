@@ -46,14 +46,20 @@ export const App = () => {
 						setServerError('');
 					}
 				})
-				.catch(error => console.error(error));
+				.catch(error => {
+					console.error(error);
+					setServerError(errorMessages.authorizationTokenError);
+				});
 
 			getSavedMovie(token)
 				.then(movies => {
 					movies && setSavedMovies(movies.filter(movie => movie.ownwer === currentUser._id));
 					movies && setFilteredMovies(movies.filter(movie => movie.ownwer === currentUser._id));
 				})
-				.catch(error => console.error(error));
+				.catch(error => {
+					console.error(error);
+					setServerError(errorMessages.serverError);
+				});
 		}
 	}, [currentUser._id, isLoggedIn]);
 
@@ -69,30 +75,23 @@ export const App = () => {
 		register(values)
 			.then(response => {
 				if (response) {
-					setIsLoggedIn(true);
-					navigate('/movies');
-					setServerError('');
+					const { email, password } = values;
+					login({ email, password })
+						.then(data => {
+							data.token && localStorage.setItem('token', data.token);
+							setIsLoggedIn(true);
+							navigate('/movies');
+							setServerError('');
+						})
+						.catch(error => console.error(error));
+				} else {
+					setServerError(errorMessages.userEmailExists);
 				}
 			})
-			.then(() => {
-				const { email, password } = values;
-				login({ email, password })
-					.then(data => data.token && localStorage.setItem('token', data.token))
-					.then(() => {
-						getUser(localStorage.getItem('token'))
-							.then(response => {
-								if (response) {
-									setIsLoggedIn(true);
-									setCurrentUser({ data: response });
-									navigate('/movies');
-									setServerError('');
-								}
-							})
-							.catch(error => console.error(error));
-					})
-					.catch(error => console.error(error));
-			})
-			.catch(error => console.error(error));
+			.catch(error => {
+				setServerError(errorMessages.registrationError);
+				console.error(error);
+			});
 	};
 
 	const handleLogin = values => {
@@ -100,20 +99,14 @@ export const App = () => {
 		login({ email: email, password: loginPassword })
 			.then(data => {
 				data.token && localStorage.setItem('token', data.token);
+				setIsLoggedIn(true);
+				navigate('/movies');
+				setServerError('');
 			})
-			.then(() => {
-				getUser(localStorage.getItem('token'))
-					.then(response => {
-						if (response) {
-							setIsLoggedIn(true);
-							setCurrentUser({ data: response });
-							navigate('/movies');
-							setServerError('');
-						}
-					})
-					.catch(error => console.error(error));
-			})
-			.catch(error => console.error(error));
+			.catch(error => {
+				setServerError(errorMessages.wrongUsernamePassword);
+				console.error(error);
+			});
 	};
 
 	const handleLogout = () => {
@@ -138,7 +131,12 @@ export const App = () => {
 						setServerError('');
 					}
 				})
-				.catch(error => console.error(error));
+				.catch(error => {
+					setServerError(errorMessages.profileError);
+					console.error(error);
+				});
+		} else {
+			setServerError(errorMessages.authorizationTokenWrongFormat);
 		}
 	};
 
@@ -152,7 +150,10 @@ export const App = () => {
 						setFilteredMovies(prevState => [...prevState, movie]);
 					}
 				})
-				.catch(error => console.error(error));
+				.catch(error => {
+					setServerError(errorMessages.serverError);
+					console.error(error);
+				});
 		}
 	};
 
@@ -166,7 +167,10 @@ export const App = () => {
 						filteredMovies.filter(filteredMovie => filteredMovie.movieId !== movieToBeDeleted.movieId)
 					);
 				})
-				.catch(error => console.error(error));
+				.catch(error => {
+					setServerError(errorMessages.serverError);
+					console.error(error);
+				});
 		}
 	};
 
