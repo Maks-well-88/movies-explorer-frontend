@@ -1,9 +1,9 @@
 import './MovieButton.css';
 
-export const MovieButton = ({ moviesPage, onSaveFilm, isSavedFilm, onDeleteFilm }) => {
+export const MovieButton = ({ page, onSaveFilm, isSavedFilm, onDeleteFilm }) => {
 	return (
 		<>
-			{moviesPage ? (
+			{!page ? (
 				isSavedFilm ? (
 					<button
 						className='MovieButton__button MovieButton__button_type_saved'

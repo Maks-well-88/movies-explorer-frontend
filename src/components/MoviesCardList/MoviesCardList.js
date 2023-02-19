@@ -1,12 +1,22 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { MoviesCard } from '../MoviesCard/MoviesCard';
+import { searchMessages } from '../../utils/constants';
 import './MoviesCardList.css';
 
-export const MoviesCardList = ({ films, isEmptyResponse }) => {
+export const MoviesCardList = ({ page, searchResultNotification, films }) => {
 	const [cardCount, setCardCount] = useState(12);
 	const allFilmsCount = films.length;
+	const moreStyle =
+		page === '/movies' ? 'MoviesCardList__more' : 'MoviesCardList__more MoviesCardList__more_active';
+	const cardListStyle =
+		page === '/movies' ? 'MoviesCardList MoviesCardList_position_saved-movies' : 'MoviesCardList';
+
+	useEffect(() => {
+		updateCardCount();
+		window.addEventListener('resize', () => setTimeout(updateCardCount, 1000));
+		return () => window.removeEventListener('resize', () => setTimeout(updateCardCount, 1000));
+	}, []);
 
 	const updateCardCount = () => {
 		if (window.innerWidth <= 480) {
@@ -28,36 +38,23 @@ export const MoviesCardList = ({ films, isEmptyResponse }) => {
 		}
 	};
 
-	useEffect(() => {
-		updateCardCount();
-		window.addEventListener('resize', () => setTimeout(updateCardCount, 1000));
-		return () => window.removeEventListener('resize', () => setTimeout(updateCardCount, 1000));
-	}, []);
-
-	const location = useLocation();
-	const moreStyle =
-		location.pathname === '/movies'
-			? 'MoviesCardList__more MoviesCardList__more_active'
-			: 'MoviesCardList__more';
-	const cardListStyle =
-		location.pathname === '/movies'
-			? 'MoviesCardList'
-			: 'MoviesCardList MoviesCardList_position_saved-movies';
-
 	return (
 		<>
-			{isEmptyResponse ? (
+			{!films.length && !page ? (
 				<div className='MoviesCardList__empty-wrapper'>
-					<p className='MoviesCardList__empty-title'>Ничего не найдено</p>
+					<p className='MoviesCardList__empty-title'>
+						{searchResultNotification.includes(searchMessages.notFound) ? 'Ничего не найдено' : ''}
+					</p>
 				</div>
 			) : (
 				<div className={cardListStyle}>
-					{films.slice(0, cardCount).map((film, i) => (
-						<MoviesCard key={i} film={film} />
-					))}
+					{!page
+						? films.slice(0, cardCount).map(film => <MoviesCard key={film.id} film={film} page={page} />)
+						: films.map(film => <MoviesCard key={film._id} film={film} page={page} />)}
 				</div>
 			)}
-			{films.length > 3 && (
+
+			{films.length > 0 && !page && (
 				<div className={moreStyle}>
 					{cardCount < allFilmsCount && (
 						<button className='MoviesCardList__more-button' type='button' onClick={handleShowMoreCards}>

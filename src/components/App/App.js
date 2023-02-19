@@ -25,8 +25,6 @@ import './App.css';
 export const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isChecked, setIsChecked] = useState(false);
-	const [isEmptyResponse, setIsEmptyResponse] = useState(false);
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 	const [savedMovies, setSavedMovies] = useState([]);
 	const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
@@ -50,23 +48,16 @@ export const App = () => {
 				.catch(error => console.error(error));
 
 			getSavedMovie(token)
-				.then(films => {
-					films && setSavedMovies(films);
+				.then(movies => {
+					movies && setSavedMovies(movies.filter(movie => movie.ownwer === currentUser._id));
 				})
 				.catch(error => console.error(error));
 		}
-	}, [isLoggedIn]);
-
-	useEffect(() => {
-		const store = JSON.parse(localStorage.getItem('movies'));
-		store && setMovies(JSON.parse(localStorage.getItem('movies')));
-		setIsChecked(JSON.parse(localStorage.getItem('checkbox')));
-	}, []);
+	}, [currentUser._id, isLoggedIn]);
 
 	const handleOpenMenu = () => setIsOpenedMenu(true);
 	const handleCloseMenuEsc = e => e.key === 'Escape' && setIsOpenedMenu(false);
 	const handleCloseMenu = e => e.target === e.currentTarget && setIsOpenedMenu(false) && e.stopPropagation();
-	const handleChangeCheckbox = () => setIsChecked(prevState => !prevState);
 
 	const handleRegister = values => {
 		register(values)
@@ -122,6 +113,9 @@ export const App = () => {
 	const handleLogout = () => {
 		setIsLoggedIn(false);
 		localStorage.removeItem('token');
+		localStorage.removeItem('movies');
+		localStorage.removeItem('checkbox');
+		localStorage.removeItem('query');
 		navigate('/');
 	};
 
@@ -164,16 +158,6 @@ export const App = () => {
 		}
 	};
 
-	const getMinutesString = minutes => {
-		if (minutes % 10 === 1 && minutes % 100 !== 11) {
-			return 'минута';
-		} else if ([2, 3, 4].includes(minutes % 10) && ![12, 13, 14].includes(minutes % 100)) {
-			return 'минуты';
-		} else {
-			return 'минут';
-		}
-	};
-
 	return (
 		<div className='App'>
 			<CurrentUserContext.Provider value={{ currentUser }}>
@@ -181,21 +165,15 @@ export const App = () => {
 					value={{
 						location,
 						isLoggedIn,
-						isOpenedMenu,
 						setIsOpenedMenu,
 						handleOpenMenu,
-						handleCloseMenuEsc,
-						handleCloseMenu,
 						movies,
+						setMovies,
 						savedMovies,
-						getMinutesString,
-						serverError,
 						setSubmitButtonDisabled,
 						submitButtonDisabled,
-						setIsLoggedIn,
-						setCurrentUser,
+						serverError,
 						setServerError,
-						currentUser,
 						handleSaveFilm,
 						handleDeleteFilm,
 					}}
@@ -207,30 +185,15 @@ export const App = () => {
 						<Route
 							path='/movies'
 							element={
-								<ProtectedRoute
-									component={Movies}
-									isLoggedIn={isLoggedIn}
-									isLoading={isLoading}
-									isChecked={isChecked}
-									setMovies={setMovies}
-									setIsLoading={setIsLoading}
-									onCheck={handleChangeCheckbox}
-									movies={movies}
-									isEmptyResponse={isEmptyResponse}
-									setIsEmptyResponse={setIsEmptyResponse}
-								/>
+								<ProtectedRoute component={Movies} isLoading={isLoading} setIsLoading={setIsLoading} />
 							}
 						/>
-						<Route
-							path='/saved-movies'
-							element={<ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} />}
-						/>
+						<Route path='/saved-movies' element={<ProtectedRoute component={SavedMovies} />} />
 						<Route
 							path='/profile'
 							element={
 								<ProtectedRoute
 									component={Profile}
-									isLoggedIn={isLoggedIn}
 									onUpdateUser={handleUpdateUserProfile}
 									onLogout={handleLogout}
 								/>
@@ -238,7 +201,12 @@ export const App = () => {
 						/>
 						<Route path='*' element={isLoggedIn ? <NotFound /> : <Navigate to='/signin' />} />
 					</Routes>
-					<Menu />
+					<Menu
+						isOpenedMenu={isOpenedMenu}
+						setIsOpenedMenu={setIsOpenedMenu}
+						handleCloseMenuEsc={handleCloseMenuEsc}
+						handleCloseMenu={handleCloseMenu}
+					/>
 				</AppContext.Provider>
 			</CurrentUserContext.Provider>
 		</div>

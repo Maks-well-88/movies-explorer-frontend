@@ -1,7 +1,3 @@
-import PicOne from '../images/pic-1.png';
-import PicTwo from '../images/pic-2.png';
-import PicThree from '../images/pic-3.png';
-
 export const headerNavigationData = [
 	{
 		link: '/movies',
@@ -41,6 +37,12 @@ export const errorMessages = {
 	authorizationTokenWrongFormat:
 		'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
 	wrongUsernamePassword: 'Вы ввели неправильный логин или пароль',
-	keywordMissing: 'Нужно ввести ключевое слово',
 	searchError: 'Произошла ошибка. Проблема с соединением или сервер недоступен. Попробуйте позже',
+	keywordMissing: 'Нужно ввести ключевое слово',
 };
+
+export const searchMessages = {
+	notFound: 'Ничего не найдено',
+};
+
+export const shortMovieDuration = 40;

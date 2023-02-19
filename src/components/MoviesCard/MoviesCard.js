@@ -4,14 +4,23 @@ import { MovieButton } from '../MovieButton/MovieButton';
 import { AppContext } from '../../contexts/AppContext';
 import './MoviesCard.css';
 
-export const MoviesCard = ({ film }) => {
-	const { getMinutesString, handleSaveFilm, handleDeleteFilm, savedMovies, location } =
-		useContext(AppContext);
+export const MoviesCard = ({ film, page }) => {
+	const { handleSaveFilm, handleDeleteFilm, savedMovies } = useContext(AppContext);
 
 	const isSavedFilm = savedMovies.find(savedFilm => savedFilm.movieId === film.id);
-	const moviesPage = location.pathname === '/movies';
+
+	const getMinutesString = minutes => {
+		if (minutes % 10 === 1 && minutes % 100 !== 11) {
+			return 'минута';
+		} else if ([2, 3, 4].includes(minutes % 10) && ![12, 13, 14].includes(minutes % 100)) {
+			return 'минуты';
+		} else {
+			return 'минут';
+		}
+	};
 
 	const handleCardClick = e => e.target.tagName !== 'BUTTON' && window.open(film.trailerLink, '_blank');
+
 	const onSaveFilm = () => handleSaveFilm(film);
 
 	const onDeleteFilm = () => {
@@ -32,7 +41,7 @@ export const MoviesCard = ({ film }) => {
 				</p>
 			</div>
 			<div className='MoviesCard__wrapper'>
-				{moviesPage ? (
+				{!page ? (
 					<img
 						className='MoviesCard__image'
 						src={`https://api.nomoreparties.co/${film.image.url}`}
@@ -47,7 +56,7 @@ export const MoviesCard = ({ film }) => {
 					onSaveFilm={onSaveFilm}
 					onDeleteFilm={onDeleteFilm}
 					isSavedFilm={isSavedFilm}
-					moviesPage={moviesPage}
+					page={page}
 				/>
 			</div>
 		</article>
