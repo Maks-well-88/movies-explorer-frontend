@@ -5,7 +5,25 @@
 	color: #ff004c;
 }
 
-.ErrorMessage_position_profile {
+.ErrorMessage_position_search {
+	position: absolute;
+	top: 70px;
+}
+
+.ErrorMessage_position_input-error {
+	margin: 4px 0 3px 0;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+}
+
+.ErrorMessage_position_submit-error {
 	margin: 0;
-	text-align: center;
+}
+
+@media screen and (max-width: 550px) {
+	.ErrorMessage_position_search {
+		width: 100%;
+		text-align: center;
+	}
 }

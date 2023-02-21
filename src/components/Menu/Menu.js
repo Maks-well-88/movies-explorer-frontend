@@ -1,13 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { AppContext } from '../../contexts/AppContext';
 import { AccountButton } from '../AccountButton/AccountButton';
 import './Menu.css';
 
-export const Menu = () => {
-	const { isOpenedMenu, setIsOpenedMenu, handleCloseMenuEsc, handleCloseMenu } = useContext(AppContext);
-
+export const Menu = ({ isOpenedMenu, setIsOpenedMenu, handleCloseMenuEsc, handleCloseMenu }) => {
 	useEffect(() => {
 		document.addEventListener('keydown', handleCloseMenuEsc);
 		return () => document.removeEventListener('keydown', handleCloseMenuEsc);

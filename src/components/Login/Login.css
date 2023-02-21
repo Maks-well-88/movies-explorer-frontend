@@ -31,7 +31,7 @@
 }
 
 .Login__field {
-	margin: 10px 0 20px 0;
+	margin: 10px 0 0 0;
 	box-sizing: border-box;
 	width: 396px;
 	padding: 15px;
@@ -48,14 +48,14 @@
 	color: #ee3465;
 }
 
-.Login__field[type='password'] {
-	margin-bottom: 0;
-}
-
 .Login__field:focus {
 	outline-color: rgba(255, 104, 56, 0.8);
 	border-radius: 2rem;
 	background-color: #ffffff;
+}
+
+.Login__error-container {
+	min-height: 20px;
 }
 
 .Login__info {
@@ -117,7 +117,7 @@
 
 	.Login__field {
 		max-width: 100%;
-		margin: 10px 0 20px 0;
+		margin: 10px 0 0 0;
 	}
 
 	.Login__info {

@@ -1,16 +1,3 @@
-import PicOne from '../images/pic-1.png';
-import PicTwo from '../images/pic-2.png';
-import PicThree from '../images/pic-3.png';
-import PicFour from '../images/pic-4.png';
-import PicFive from '../images/pic-5.png';
-import PicSix from '../images/pic-6.png';
-import PicSeven from '../images/pic-7.png';
-import PicEight from '../images/pic-8.png';
-import PicNine from '../images/pic-9.png';
-import PicTen from '../images/pic-10.png';
-import PicEleven from '../images/pic-11.png';
-import PicTwelve from '../images/pic-12.png';
-
 export const headerNavigationData = [
 	{
 		link: '/movies',
@@ -39,126 +26,33 @@ export const footerNavigationData = [
 	},
 ];
 
-export const savedMoviesList = [
-	{
-		id: 1,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicOne,
-		saved: true,
-	},
-	{
-		id: 2,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicTwo,
-		saved: true,
-	},
-	{
-		id: 3,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicThree,
-		saved: true,
-	},
-];
-
-export const moviesList = [
-	{
-		id: 1,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicOne,
-		saved: false,
-	},
-	{
-		id: 2,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicTwo,
-		saved: false,
-	},
-	{
-		id: 3,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicThree,
-		saved: false,
-	},
-	{
-		id: 4,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicFour,
-		saved: false,
-	},
-	{
-		id: 5,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicFive,
-		saved: false,
-	},
-	{
-		id: 6,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicSix,
-		saved: false,
-	},
-	{
-		id: 7,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicSeven,
-		saved: false,
-	},
-	{
-		id: 8,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicEight,
-		saved: false,
-	},
-	{
-		id: 9,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicNine,
-		saved: false,
-	},
-	{
-		id: 10,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicTen,
-		saved: false,
-	},
-	{
-		id: 11,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicEleven,
-		saved: false,
-	},
-	{
-		id: 12,
-		name: 'В погоне за Бенкси',
-		time: 27,
-		imageSrc: PicTwelve,
-		saved: false,
-	},
-];
-
 export const errorMessages = {
-	profileError: 'При обновлении профиля произошла ошибка',
-	serverError: '500, на сервере произошла ошибка',
-	notFound: '404 Страница по указанному маршруту не найдена',
-	userExists: 'Пользователь с таким email уже существует',
-	registrationError: 'При регистрации пользователя произошла ошибка',
-	userEmailExists: 'Пользователь с таким email уже существует',
-	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректе',
-	authorizationTokenWrongFormat:
-		'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
+	keywordMissing: 'Нужно ввести ключевое слово',
 	wrongUsernamePassword: 'Вы ввели неправильный логин или пароль',
+	searchError: 'Произошла ошибка. Проблема с соединением или сервер недоступен. Попробуйте позже',
+	profileError: 'При обновлении профиля произошла ошибка',
+	authorizationTokenError: 'При авторизации произошла ошибка. Переданный токен некорректен',
+	serverError: '500, на сервере произошла ошибка',
+	userEmailExists: 'Пользователь с таким email уже существует',
+	registrationError: 'При регистрации пользователя произошла ошибка',
+	authorizationTokenWrongFormat: 'Токен не передан или передан не в том формате',
 };
+
+export const inputValidationMessages = {
+	cantBeBlank: 'Это поле не может быть пустым',
+	invalidUsername: 'Недопустимое имя пользователя',
+	incorrectEmail: 'Некорректный адрес электронной почты',
+	tooShortPassword: 'Пароль не может быть короче 6 символов',
+};
+
+export const regExps = {
+	emailRegExp: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
+	nameRegExp: /^[a-zA-Zа-яА-Я\s-]+$/,
+	passRegExp: /[A-Za-z0-9]{6,}/,
+};
+
+export const searchMessages = {
+	notFound: 'Ничего не найдено',
+};
+
+export const shortMovieDuration = 40;
